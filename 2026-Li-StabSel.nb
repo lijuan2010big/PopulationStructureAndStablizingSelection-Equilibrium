@@ -1,0 +1,2886 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    106440,       2878]
+NotebookOptionsPosition[    105005,       2853]
+NotebookOutlinePosition[    105397,       2869]
+CellTagsIndexPosition[    105354,       2866]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", "\"\<Global`*\>\"", "]"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Single", "-", 
+    RowBox[{"locus", " ", "underdominant", " ", "model"}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"Figure", " ", "1", "b"}],
+     FontWeight->"Bold"], 
+    StyleBox[",",
+     FontWeight->"Bold"], 
+    RowBox[{
+     StyleBox[
+      RowBox[{"1", "c"}],
+      FontWeight->"Bold"], 
+     StyleBox[";",
+      FontWeight->"Bold"], 
+     StyleBox[" ",
+      FontWeight->"Bold"], 
+     RowBox[{
+     "Stationary", " ", "allele", " ", "frequency", " ", "distribution"}]}]}],
+    "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", 
+    RowBox[{"p_", ",", "Ns_", ",", "Nu_", ",", "Nm_", ",", " ", "Pmean_"}], 
+    "]"}], ":=", 
+   RowBox[{
+    RowBox[{"Exp", "[", 
+     RowBox[{
+      RowBox[{"-", "4"}], "*", "Ns", "*", "p", "*", 
+      RowBox[{"(", 
+       RowBox[{"1", "-", "p"}], ")"}]}], "]"}], " ", 
+    SuperscriptBox["p", 
+     RowBox[{
+      RowBox[{"4", " ", "Nu"}], " ", "+", " ", 
+      RowBox[{"4", "Nm", " ", "Pmean"}], "-", "1"}]], " ", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"1", "-", "p"}], ")"}], 
+     RowBox[{
+      RowBox[{"4", " ", "Nu"}], " ", "+", " ", 
+      RowBox[{"4", " ", "Nm", " ", 
+       RowBox[{"(", 
+        RowBox[{"1", "-", " ", "Pmean"}], ")"}]}], "-", "1"}]]}]}], " ", 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"fnorm", "[", 
+     RowBox[{"p_", ",", "Ns_", ",", "Nu_", ",", "Nm_", ",", " ", "Pmean_"}], 
+     "]"}], ":=", 
+    RowBox[{
+     RowBox[{"f", "[", 
+      RowBox[{"p", ",", "Ns", ",", "Nu", ",", "Nm", ",", " ", "Pmean"}], 
+      "]"}], "/", 
+     RowBox[{"NIntegrate", "[", 
+      RowBox[{
+       RowBox[{"f", "[", 
+        RowBox[{"p0", ",", "Ns", ",", "Nu", ",", "Nm", ",", "Pmean"}], "]"}], 
+       ",", 
+       RowBox[{"{", 
+        RowBox[{"p0", ",", "0", ",", "1"}], "}"}]}], "]"}]}]}], ";"}], "\n", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Allele", " ", "frequency", " ", "in", " ", "the", " ", "metapopulation", 
+    " ", "is", " ", "equal", " ", "to", " ", "the", " ", "mean", " ", 
+    "allele", " ", "frequency", " ", "within", " ", "demes"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Pbar", "[", 
+     RowBox[{"Ns_", ",", "Nu_", ",", "Nm_", ",", " ", "Pmean_"}], "]"}], ":=", 
+    RowBox[{"NIntegrate", "[", 
+     RowBox[{
+      RowBox[{"p", "*", 
+       RowBox[{"fnorm", "[", 
+        RowBox[{"p", ",", "Ns", ",", "Nu", ",", "Nm", ",", " ", "Pmean"}], 
+        "]"}]}], ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"p", ",", "0", ",", "1"}], "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+     StyleBox[
+      RowBox[{"Figure", " ", "1", "a"}],
+      FontWeight->"Bold"], 
+     StyleBox[",",
+      FontWeight->"Bold"], 
+     StyleBox["S1",
+      FontWeight->"Bold"], 
+     StyleBox[",",
+      FontWeight->"Bold"], 
+     StyleBox["S2",
+      FontWeight->"Bold"], 
+     StyleBox[",",
+      FontWeight->"Bold"], 
+     RowBox[{
+      StyleBox["S5",
+       FontWeight->"Bold"], 
+      StyleBox[";",
+       FontWeight->"Bold"], 
+      StyleBox[" ",
+       FontWeight->"Bold"], 
+      RowBox[{
+       RowBox[{
+       "Obtain", " ", "allele", " ", "frequency", " ", "in", " ", "the", " ", 
+        "metapopulation", " ", "self"}], "-", "consistently"}]}], ",", " ", 
+     RowBox[{
+      OverscriptBox["p", "_"], ";"}]}], ")"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"metaP", "[", 
+     RowBox[{"Nu_", ",", "Ns_", ",", " ", "Nm_"}], "]"}], ":=", 
+    RowBox[{"pb", "/.", 
+     RowBox[{"FindRoot", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Pbar", "[", 
+         RowBox[{"Ns", ",", "Nu", ",", "Nm", ",", "pb"}], "]"}], "==", "pb"}],
+        ",", 
+       RowBox[{"{", 
+        RowBox[{"pb", ",", " ", "0.01"}], "}"}]}], " ", "]"}]}]}], " ", ";"}],
+   "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"Figure", " ", "1", "e"}],
+     FontWeight->"Bold"], 
+    StyleBox[",",
+     FontWeight->"Bold"], 
+    StyleBox[
+     RowBox[{"2", "a", 
+      RowBox[{"(", 
+       RowBox[{"dotted", " ", "lines"}], ")"}]}],
+     FontWeight->"Bold"], 
+    StyleBox[",",
+     FontWeight->"Bold"], 
+    RowBox[{
+     StyleBox[
+      RowBox[{"3", "a", 
+       RowBox[{"(", 
+        RowBox[{"dotted", " ", "lines"}], ")"}]}],
+      FontWeight->"Bold"], 
+     StyleBox[";",
+      FontWeight->"Bold"], 
+     StyleBox[" ",
+      FontWeight->"Bold"], 
+     RowBox[{"Heterozygosity", " ", "in", " ", "full", " ", "population"}], 
+     ";", " ", 
+     RowBox[{"scaled", " ", "genic", " ", "variance", " ", "is", " ", 
+      RowBox[{"heterozygosity", "/", "2"}], "*", 
+      RowBox[{"Ns", "/", 
+       RowBox[{"Nu", "."}]}]}]}]}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"HetMeta", "[", 
+     RowBox[{"Nu_", ",", " ", "Ns_", ",", " ", "Nm_"}], "]"}], ":=", 
+    RowBox[{"FullSimplify", "[", 
+     RowBox[{"2", "*", 
+      RowBox[{"metaP", "[", 
+       RowBox[{"Nu", ",", " ", "Ns", ",", " ", "Nm"}], "]"}], "*", 
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        RowBox[{"metaP", "[", 
+         RowBox[{"Nu", ",", " ", "Ns", ",", " ", "Nm"}], "]"}]}], ")"}]}], 
+     "]"}]}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"Figure", " ", "1", "f"}],
+     FontWeight->"Bold"], 
+    StyleBox[",",
+     FontWeight->"Bold"], 
+    StyleBox[
+     RowBox[{"2", "b", 
+      RowBox[{"(", 
+       RowBox[{"dotted", " ", "lines"}], ")"}]}],
+     FontWeight->"Bold"], 
+    StyleBox[",",
+     FontWeight->"Bold"], 
+    StyleBox[" ",
+     FontWeight->"Bold"], 
+    StyleBox[
+     RowBox[{"3", "b", 
+      RowBox[{"(", 
+       RowBox[{"dotted", " ", "lines"}], ")"}]}],
+     FontWeight->"Bold"], 
+    StyleBox[",",
+     FontWeight->"Bold"], 
+    StyleBox[" ",
+     FontWeight->"Bold"], 
+    RowBox[{
+     StyleBox[
+      RowBox[{"S6", 
+       RowBox[{"(", 
+        RowBox[{"dotted", " ", "lines"}], ")"}]}],
+      FontWeight->"Bold"], 
+     StyleBox[";",
+      FontWeight->"Bold"], 
+     RowBox[{"Heterozygosity", " ", "within", " ", "demes"}]}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"HetDeme", "[", 
+     RowBox[{"Nu_", ",", " ", "Ns_", ",", " ", "Nm_"}], "]"}], ":=", " ", 
+    RowBox[{"NIntegrate", "[", 
+     RowBox[{
+      RowBox[{"2", "*", "p", "*", 
+       RowBox[{"(", 
+        RowBox[{"1", "-", "p"}], ")"}], "*", 
+       RowBox[{"fnorm", "[", 
+        RowBox[{"p", ",", "Ns", ",", "Nu", ",", "Nm", ",", " ", 
+         RowBox[{"metaP", "[", 
+          RowBox[{"Nu", ",", " ", "Ns", ",", " ", "Nm"}], "]"}]}], "]"}]}], 
+      ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"p", ",", "0", ",", "1"}], "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"Figure", " ", "1", "g"}],
+     FontWeight->"Bold"], 
+    StyleBox[",",
+     FontWeight->"Bold"], 
+    StyleBox[" ",
+     FontWeight->"Bold"], 
+    RowBox[{
+     StyleBox[
+      RowBox[{"2", "c", 
+       RowBox[{"(", 
+        RowBox[{"dotted", " ", "lines"}], ")"}]}],
+      FontWeight->"Bold"], 
+     StyleBox[";",
+      FontWeight->"Bold"], 
+     StyleBox[" ",
+      FontWeight->"Bold"], "Fst"}]}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"FST", "[", 
+    RowBox[{"Nu_", ",", "Ns_", ",", " ", "Nm_"}], "]"}], ":=", 
+   RowBox[{"FullSimplify", "[", 
+    RowBox[{"1", "-", 
+     RowBox[{
+      RowBox[{"HetDeme", "[", 
+       RowBox[{"Nu", ",", " ", "Ns", ",", " ", "Nm"}], "]"}], "/", 
+      RowBox[{"HetMeta", "[", 
+       RowBox[{"Nu", ",", " ", "Ns", ",", " ", "Nm"}], "]"}]}]}], "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.98134265883503*^9, 3.981342681689311*^9}, {
+   3.981343836905455*^9, 3.9813438484605007`*^9}, {3.9813439042771063`*^9, 
+   3.981344049098632*^9}, {3.981344089378826*^9, 3.981344157653995*^9}, {
+   3.981344193954749*^9, 3.981344223512689*^9}, {3.981346067076161*^9, 
+   3.9813460979765377`*^9}, {3.981346150145659*^9, 3.981346152338089*^9}, {
+   3.98134635150322*^9, 3.981346401071928*^9}, {3.981346446955662*^9, 
+   3.981346458422089*^9}, {3.9813464994841843`*^9, 3.981346505759573*^9}, {
+   3.9813466016752367`*^9, 3.981346645908271*^9}, 3.981346919293563*^9, {
+   3.981347187406219*^9, 3.981347209213215*^9}, {3.9813472736164293`*^9, 
+   3.9813473398706713`*^9}, {3.9813493162356443`*^9, 3.981349370569126*^9}, 
+   3.981350764214044*^9},ExpressionUUID->"745a332b-040e-4978-9636-\
+e9d3e820c7ec"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "The", " ", "critical", " ", "migration", " ", "rates", " ", "adopted", 
+     " ", "from", " ", "Barton", " ", "and", " ", "Rouhani", " ", "1993.", 
+     " ", "Ns"}], "=", 
+    RowBox[{
+    "1", " ", "is", " ", "classified", " ", "to", " ", "weak", " ", "effect", 
+     " ", 
+     RowBox[{"regime", ".", " ", "Or"}], " ", 
+     RowBox[{"SI", ".", "a"}], " ", "in", " ", 
+     RowBox[{"SI", ".", "a"}]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"For", " ", "weak", " ", "selection"}], ";", " ", 
+    RowBox[{
+     RowBox[{"eq", ".", "S"}], ".4"}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"NmCritW", "[", 
+      RowBox[{"Nu_", ",", " ", "Ns_"}], "]"}], ":=", 
+     FractionBox[
+      RowBox[{
+       RowBox[{"Nu", " ", 
+        RowBox[{"(", 
+         RowBox[{"1.5", "\[VeryThinSpace]", "-", " ", "Ns", "+", 
+          RowBox[{"8", "Nu"}]}], ")"}]}], "+", 
+       RowBox[{"0.5", 
+        SqrtBox[
+         RowBox[{"Nu", " ", 
+          RowBox[{"(", 
+           RowBox[{"Nu", "+", 
+            RowBox[{"Ns", " ", 
+             RowBox[{"(", 
+              RowBox[{"2", "+", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"12", "\[VeryThinSpace]", "+", 
+                  RowBox[{"4", "Ns"}]}], ")"}], " ", "Nu"}]}], ")"}]}]}], 
+           ")"}]}]]}]}], 
+      RowBox[{"Ns", "-", 
+       RowBox[{"4", " ", "Nu"}]}]]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"For", " ", "strong", " ", "selection", " ", 
+      RowBox[{"(", 
+       RowBox[{"Ns", ">", "1"}], ")"}]}], ",", " ", 
+     RowBox[{
+      RowBox[{"eq", ".", " ", "21"}], "b", " ", "in", " ", "Barton", " ", 
+      "and", " ", "Rouhani", " ", "1993.", " ", 
+      RowBox[{"eq", ".", "S"}], ".9"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   
+   RowBox[{
+    RowBox[{
+     RowBox[{"NmCritS", "[", 
+      RowBox[{"Nu_", ",", " ", "Ns_"}], "]"}], ":=", 
+     RadicalBox[
+      RowBox[{"Nu", "/", 
+       RowBox[{"(", " ", 
+        RowBox[{
+         RowBox[{"Log", "[", 
+          RowBox[{"4", "Ns"}], "]"}], "+", "EulerGamma"}], ")"}]}], "2"]}], 
+    " ", ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "Find", " ", "the", " ", "critical", " ", "Nm", " ", "from", " ", "the", 
+      " ", "approximation", " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"eq", ".", " ", "S"}], ".4", " ", "or", " ", "S", ".9"}], 
+       ")"}], "numerically"}], ";", 
+     StyleBox[
+      RowBox[{"Figure", " ", "1", "d"}],
+      FontWeight->"Bold"]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"NmCritD1", "[", 
+     RowBox[{"Nu_", ",", " ", "us_"}], "]"}], ":=", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Ns", "=", 
+        RowBox[{"Nu", "/", "us"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"Ns", ">", "2"}], ",", " ", 
+         RowBox[{"Return", "[", "0", "]"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"tmpNm", "=", 
+        RowBox[{
+         RowBox[{
+          FractionBox["1", 
+           RowBox[{"Ns", "-", 
+            RowBox[{"4", " ", "Nu"}]}]], 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"Nu", " ", 
+             RowBox[{"(", 
+              RowBox[{"1.5", "\[VeryThinSpace]", "-", " ", "Ns", "+", 
+               RowBox[{"8", "Nu"}]}], ")"}]}], "+", 
+            RowBox[{"0.5", 
+             SqrtBox[
+              RowBox[{"Nu", " ", 
+               RowBox[{"(", 
+                RowBox[{"Nu", "+", 
+                 RowBox[{"Ns", " ", 
+                  RowBox[{"(", 
+                   RowBox[{"2", "+", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"12", "\[VeryThinSpace]", "+", 
+                    RowBox[{"4", "Ns"}]}], ")"}], " ", "Nu"}]}], ")"}]}]}], 
+                ")"}]}]]}]}], ")"}]}], "+", "0.01"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"tmpP", "=", 
+        RowBox[{"metaP", "[", 
+         RowBox[{"Nu", ",", " ", "tmpNm", ",", " ", "Ns"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"0.5", "-", "tmpP"}], "<", 
+          RowBox[{"10", "^", 
+           RowBox[{"-", "4"}]}]}], ",", " ", 
+         RowBox[{"Return", "[", "tmpNm", "]"}]}], "]"}], ";"}], 
+      RowBox[{"(*", 
+       RowBox[{
+       "This", " ", "line", " ", "is", " ", "not", " ", "used", " ", "as", "  ",
+         "0.01", " ", "is", " ", "added", " ", "to", " ", "tmpNm", 
+        RowBox[{
+         RowBox[{"(", " ", 
+          RowBox[{
+          "the", " ", "appromination", " ", "of", " ", "the", " ", "critical",
+            " ", "Nm"}], ")"}], "."}]}], "*)"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"step", "=", 
+       RowBox[{"Nu", "/", "5"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"tmpP", "-", "0.5"}], "<", 
+         RowBox[{"-", 
+          RowBox[{"10", "^", 
+           RowBox[{"-", "3"}]}]}]}], ",", " ", "\[IndentingNewLine]", 
+        RowBox[{"Until", "[", " ", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"0.5", "-", "tmpP"}], "<", 
+           RowBox[{"10", "^", 
+            RowBox[{"-", "3"}]}]}], " ", ",", 
+          RowBox[{
+           RowBox[{"tmpNm", "=", 
+            RowBox[{"tmpNm", "-", "step"}]}], ";", 
+           RowBox[{"tmpP", "=", 
+            RowBox[{"metaP", "[", 
+             RowBox[{"Nu", ",", " ", "tmpNm", ",", " ", "Ns"}], "]"}]}]}]}], 
+         "]"}], ",", " ", "\[IndentingNewLine]", 
+        RowBox[{"Until", "[", " ", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"0.5", "-", "tmpP"}], ">", 
+           RowBox[{"10", "^", 
+            RowBox[{"-", "3"}]}]}], " ", ",", 
+          RowBox[{
+           RowBox[{"tmpNm", "=", 
+            RowBox[{"tmpNm", "+", "step"}]}], ";", 
+           RowBox[{"tmpP", "=", 
+            RowBox[{"metaP", "[", 
+             RowBox[{"Nu", ",", " ", "tmpNm", ",", " ", "Ns"}], "]"}]}]}]}], 
+         "]"}]}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+      "tmpNm"}], " ", ")"}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"NmCritD2", "[", 
+     RowBox[{"Nu_", ",", " ", "us_"}], "]"}], ":=", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"Ns", "=", 
+       RowBox[{"Nu", "/", "us"}]}], ";", 
+      RowBox[{"tmpNm", "=", 
+       RowBox[{
+        RadicalBox[
+         RowBox[{"Nu", "/", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"Log", "[", 
+             RowBox[{"4", "Ns"}], "]"}], "+", "EulerGamma"}], ")"}]}], "2"], 
+        " ", "+", "0.01"}]}], ";", 
+      RowBox[{"Print", "[", "tmpNm", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"Ns", "<", "1"}], ",", " ", 
+        RowBox[{"Return", "[", "0", "]"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"tmpP", "=", 
+          RowBox[{"metaP", "[", 
+           RowBox[{"Nu", ",", " ", "tmpNm", ",", " ", "Ns"}], "]"}]}], ";", 
+         "\[IndentingNewLine]", " ", 
+         RowBox[{"step", "=", 
+          RowBox[{"Nu", "/", "5"}]}], ";", 
+         RowBox[{"Print", "[", "tmpP", "]"}], ";", "\[IndentingNewLine]", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"tmpP", "-", "0.5"}], "<", 
+            RowBox[{"-", 
+             RowBox[{"10", "^", 
+              RowBox[{"-", "6"}]}]}]}], ",", " ", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"Until", "[", " ", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"0.5", "-", "tmpP"}], "<", 
+               RowBox[{"10", "^", 
+                RowBox[{"-", "6"}]}]}], " ", ",", 
+              RowBox[{
+               RowBox[{"tmpPold", "=", "tmpP"}], ";", " ", 
+               RowBox[{"tmpNm", "=", 
+                RowBox[{"tmpNm", "-", "step"}]}], ";", 
+               RowBox[{"tmpP", "=", 
+                RowBox[{"metaP", "[", 
+                 RowBox[{"Nu", ",", " ", "tmpNm", ",", " ", "Ns"}], "]"}]}], 
+               ";", 
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"tmpPold", "-", "tmpP"}], ">", 
+                  RowBox[{"10", "^", 
+                   RowBox[{"-", "6"}]}]}], ",", " ", 
+                 RowBox[{"Break", "[", "]"}]}], "]"}]}]}], "]"}], ";"}], ",", 
+           " ", "\[IndentingNewLine]", 
+           RowBox[{"Until", "[", " ", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"0.5", "-", "tmpP"}], ">", 
+              RowBox[{"10", "^", 
+               RowBox[{"-", "6"}]}]}], " ", ",", 
+             RowBox[{
+              RowBox[{"tmpNm", "=", 
+               RowBox[{"tmpNm", "+", "step"}]}], ";", 
+              RowBox[{"tmpP", "=", 
+               RowBox[{"metaP", "[", 
+                RowBox[{"Nu", ",", " ", "tmpNm", ",", " ", "Ns"}], "]"}]}], 
+              ";"}]}], "]"}]}], "\[IndentingNewLine]", "]"}], ";", 
+         RowBox[{"Return", "[", "tmpNm", "]"}]}]}], "]"}]}], 
+     ")"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.981344199311967*^9, 3.981344199504081*^9}, {
+  3.981344269391083*^9, 3.981344318345271*^9}, {3.9813443508027973`*^9, 
+  3.981344583230205*^9}, {3.981344656783874*^9, 3.981344669383687*^9}, {
+  3.981344758205887*^9, 3.981344822865386*^9}, {3.981345589786407*^9, 
+  3.9813457119723186`*^9}},ExpressionUUID->"b299c82b-2b0a-40e2-9055-\
+ee17b5fb8851"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"Figure", " ", "2", " ", 
+      RowBox[{"(", 
+       RowBox[{"solid", " ", "lines"}], ")"}]}],
+     FontWeight->"Bold"], 
+    StyleBox[";",
+     FontWeight->"Bold"], 
+    StyleBox[" ",
+     FontWeight->"Bold"], 
+    RowBox[{
+     RowBox[{
+     "E\:fb00ect", " ", "of", " ", "stabilizing", " ", "selection", " ", 
+      "and", " ", "population", " ", "structure", " ", "for", " ", "an", " ", 
+      "additive", " ", "trait", " ", "influenced", " ", "by", " ", "equal"}], 
+     "-", 
+     RowBox[{"e\:fb00ect", " ", "loci"}]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"effective", " ", "s", " ", "and", " ", "m"}], ";"}], " ", "*)"}],
+   "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"HWeff", "[", 
+     RowBox[{
+     "Nu_", ",", " ", "Nm_", ",", " ", "Ns_", ",", " ", "a_", ",", " ", 
+      "demeSize_", ",", "L_"}], "]"}], ":=", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"HW", "=", "0.5"}], ";", 
+      RowBox[{"Vs", "=", 
+       RowBox[{"demeSize", "*", 
+        RowBox[{
+         RowBox[{"a", "^", "2"}], "/", 
+         RowBox[{"(", 
+          RowBox[{"Ns", "*", "2"}], ")"}]}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"pmean", "=", 
+       RowBox[{"metaP", "[", 
+        RowBox[{"Nu", ",", " ", "Nm", ",", " ", "Ns"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"HWnew", "=", 
+       RowBox[{"HetDeme", "[", 
+        RowBox[{"Nu", ",", "Nm", ",", "  ", "Ns", ",", " ", "pmean"}], 
+        "]"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"While", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Abs", "[", 
+          RowBox[{"HW", "-", "HWnew"}], "]"}], ">", "0.00000001"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"Vg", "=", 
+          RowBox[{"HWnew", "*", 
+           RowBox[{"a", "^", "2"}], "*", "L"}]}], ";", "\[IndentingNewLine]", 
+         
+         RowBox[{"(*", 
+          RowBox[{"Calculate", " ", "effective", " ", "Ns"}], "*)"}], 
+         "\[IndentingNewLine]", 
+         RowBox[{"X", "=", 
+          FractionBox["Vs", "Vg"]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"deducVg", "=", 
+          FractionBox[
+           RowBox[{"3", "+", "X", "-", 
+            RadicalBox[
+             RowBox[{"1", "+", 
+              RowBox[{"6", "X"}], "+", 
+              SuperscriptBox["X", "2"]}], "2"]}], "4"]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"NsEff", "=", 
+          RowBox[{"Ns", 
+           RowBox[{
+            SuperscriptBox[
+             RowBox[{"(", 
+              RowBox[{"1", "-", "deducVg"}], ")"}], "2"], "/", 
+            RowBox[{"(", 
+             RowBox[{"1", "+", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"1", "-", "deducVg"}], ")"}], "/", "X"}]}], 
+             ")"}]}]}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{
+          "Calculate", " ", "effective", " ", "migration", " ", "rate"}], 
+          "*)"}], "\[IndentingNewLine]", 
+         RowBox[{"VBgen", "=", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"2", "pmean", 
+              RowBox[{"(", 
+               RowBox[{"1", "-", "pmean"}], ")"}]}], "-", "HWnew"}], ")"}], 
+           "*", 
+           RowBox[{"a", "^", "2"}], "*", "L"}]}], ";", "\[IndentingNewLine]", 
+         
+         RowBox[{"NmEff", "=", 
+          RowBox[{"Nm", " ", 
+           RowBox[{"Exp", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"-", "2"}], "/", "3"}], " ", 
+             RowBox[{"VBgen", "/", "Vs"}]}], "]"}]}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{"Next", " ", "loop"}], "*)"}], "\[IndentingNewLine]", 
+         RowBox[{"pmean", "=", 
+          RowBox[{"metaP", "[", 
+           RowBox[{"Nu", ",", " ", "NmEff", ",", " ", "NsEff"}], "]"}]}], ";",
+          "\[IndentingNewLine]", 
+         RowBox[{"HW", "=", "HWnew"}], ";", "\[IndentingNewLine]", 
+         RowBox[{"HWnew", "=", 
+          RowBox[{"HetDeme", "[", 
+           RowBox[{
+           "Nu", ",", " ", "NmEff", ",", "  ", "NsEff", ",", " ", "pmean"}], 
+           "]"}]}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{"NmEff", ",", "NsEff", ",", "pmean", ",", " ", "HWnew"}], 
+       "}"}]}], ")"}]}], ";"}]}]], "Input",
+ CellChangeTimes->{{3.981344617308799*^9, 3.981344633375576*^9}, {
+  3.981345805231868*^9, 3.981345812367324*^9}, {3.981345857629332*^9, 
+  3.981345874301175*^9}, {3.981345913842003*^9, 3.9813459141981297`*^9}, {
+  3.9813461259504023`*^9, 3.981346160151928*^9}, {3.9813461940056763`*^9, 
+  3.981346206208349*^9}, {3.9813465138470497`*^9, 3.981346519396324*^9}, {
+  3.981347364087035*^9, 
+  3.981347402125602*^9}},ExpressionUUID->"1a6190c5-d28c-4fcf-a2de-\
+0d1cf3551bc6"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"Figure", " ", "3", "a"}],
+     FontWeight->"Bold"], 
+    StyleBox[",",
+     FontWeight->"Bold"], 
+    StyleBox[
+     RowBox[{"3", "b"}],
+     FontWeight->"Bold"], 
+    StyleBox[",",
+     FontWeight->"Bold"], 
+    RowBox[{
+     StyleBox[
+      RowBox[{"S6", " ", 
+       RowBox[{"(", 
+        RowBox[{"solid", " ", "lines"}], ")"}]}],
+      FontWeight->"Bold"], 
+     StyleBox[";",
+      FontWeight->"Bold"], " ", 
+     RowBox[{
+     "E\:fb00ect", " ", "of", " ", "stabilizing", " ", "selection", " ", 
+      "and", " ", "population", " ", "structure", " ", "for", " ", "an", " ", 
+      "additive", " ", "trait", " ", "influenced", " ", "by", " ", "unequal", 
+      " ", "loci"}], ";", " ", 
+     RowBox[{"three", " ", "effect", " ", "sizes"}]}], ",", " ", 
+    RowBox[{"a1", 
+     RowBox[{"(", "0.05", ")"}]}], ",", " ", 
+    RowBox[{"a2", 
+     RowBox[{"(", "0.1", ")"}], " ", "and", " ", "a3", 
+     RowBox[{"(", "0.2", ")"}], " ", "in", " ", "proportion", " ", "of", " ", 
+     "0.6"}], ",", " ", 
+    RowBox[{"0.3", " ", "and", " ", 
+     RowBox[{"0.1", "."}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"HWeffMix", "[", 
+      RowBox[{
+      "Nu_", ",", " ", "Nm_", ",", " ", "Vs_", ",", " ", "a1_", ",", "a2_", 
+       ",", "a3_", ",", " ", "demeSize_", ",", "L_"}], "]"}], ":=", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"Vg", "=", "100"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Ns1", "=", 
+        RowBox[{"demeSize", "*", 
+         RowBox[{
+          RowBox[{"a1", "^", "2"}], "/", 
+          RowBox[{"(", 
+           RowBox[{"Vs", "*", "2"}], ")"}]}]}]}], ";", "\[IndentingNewLine]", 
+       
+       RowBox[{"Ns2", "=", 
+        RowBox[{"demeSize", "*", 
+         RowBox[{
+          RowBox[{"a2", "^", "2"}], "/", 
+          RowBox[{"(", 
+           RowBox[{"Vs", "*", "2"}], ")"}]}]}]}], ";", "\[IndentingNewLine]", 
+       
+       RowBox[{"Ns3", "=", 
+        RowBox[{"demeSize", "*", 
+         RowBox[{
+          RowBox[{"a3", "^", "2"}], "/", 
+          RowBox[{"(", 
+           RowBox[{"Vs", "*", "2"}], ")"}]}]}]}], ";", "\[IndentingNewLine]", 
+       
+       RowBox[{"NsEff1", "=", "Ns1"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"NsEff2", "=", "Ns2"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"NsEff3", "=", "Ns3"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"pmean1", "=", 
+        RowBox[{"metaP", "[", 
+         RowBox[{"Nu", ",", " ", "Nm", ",", " ", "Ns1"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"pmean2", "=", 
+        RowBox[{"metaP", "[", 
+         RowBox[{"Nu", ",", " ", "Nm", ",", " ", "Ns2"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"pmean3", "=", 
+        RowBox[{"metaP", "[", 
+         RowBox[{"Nu", ",", " ", "Nm", ",", " ", "Ns3"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"HWnew1", "=", 
+        RowBox[{"HetDeme", "[", 
+         RowBox[{"Nu", ",", "Nm", ",", "  ", "Ns1", ",", " ", "pmean1"}], 
+         "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"HWnew2", "=", 
+        RowBox[{"HetDeme", "[", 
+         RowBox[{"Nu", ",", "Nm", ",", "  ", "Ns2", ",", " ", "pmean2"}], 
+         "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"HWnew3", "=", 
+        RowBox[{"HetDeme", "[", 
+         RowBox[{"Nu", ",", "Nm", ",", "  ", "Ns3", ",", " ", "pmean3"}], 
+         "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"VgNew", "=", 
+        RowBox[{
+         RowBox[{"HWnew1", "*", 
+          RowBox[{"a1", "^", "2"}], "*", "L", "*", "0.6"}], "+", 
+         RowBox[{"HWnew2", "*", 
+          RowBox[{"a2", "^", "2"}], "*", "L", "*", "0.3"}], "+", 
+         RowBox[{"HWnew3", "*", 
+          RowBox[{"a3", "^", "2"}], "*", "L", "*", "0.1"}]}]}], ";", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"While", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Abs", "[", 
+           RowBox[{"Vg", "-", "VgNew"}], "]"}], ">", "0.0000001"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Vg", "=", "VgNew"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"X", "=", 
+            FractionBox["Vs", "Vg"]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"deducVg", "=", 
+            FractionBox[
+             RowBox[{"3", "+", "X", "-", 
+              RadicalBox[
+               RowBox[{"1", "+", 
+                RowBox[{"6", "X"}], "+", 
+                SuperscriptBox["X", "2"]}], "2"]}], "4"]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"NsEff1", "=", 
+            RowBox[{"Ns1", 
+             RowBox[{
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{"1", "-", "deducVg"}], ")"}], "2"], "/", 
+              RowBox[{"(", 
+               RowBox[{"1", "+", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"1", "-", "deducVg"}], ")"}], "/", "X"}]}], 
+               ")"}]}]}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"NsEff2", "=", 
+            RowBox[{"Ns2", 
+             RowBox[{
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{"1", "-", "deducVg"}], ")"}], "2"], "/", 
+              RowBox[{"(", 
+               RowBox[{"1", "+", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"1", "-", "deducVg"}], ")"}], "/", "X"}]}], 
+               ")"}]}]}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"NsEff3", "=", 
+            RowBox[{"Ns3", 
+             RowBox[{
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{"1", "-", "deducVg"}], ")"}], "2"], "/", 
+              RowBox[{"(", 
+               RowBox[{"1", "+", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"1", "-", "deducVg"}], ")"}], "/", "X"}]}], 
+               ")"}]}]}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           RowBox[{"(*", 
+            RowBox[{
+            "Calculate", " ", "effective", " ", "migration", " ", "rate"}], 
+            "*)"}], "\[IndentingNewLine]", 
+           RowBox[{"VTgen", "=", 
+            RowBox[{
+             RowBox[{"2", "pmean1", 
+              RowBox[{"(", 
+               RowBox[{"1", "-", "pmean1"}], ")"}], "*", 
+              RowBox[{"a1", "^", "2"}], "*", "L", "*", "0.6"}], "+", 
+             RowBox[{"2", "pmean2", 
+              RowBox[{"(", 
+               RowBox[{"1", "-", "pmean2"}], ")"}], "*", 
+              RowBox[{"a2", "^", "2"}], "*", "L", "*", "0.3"}], "+", 
+             RowBox[{"2", "pmean3", 
+              RowBox[{"(", 
+               RowBox[{"1", "-", "pmean3"}], ")"}], "*", 
+              RowBox[{"a3", "^", "2"}], "*", "L", "*", "0.1"}]}]}], ";"}], 
+          ";", "\[IndentingNewLine]", 
+          RowBox[{"VBgen", "=", 
+           RowBox[{"VTgen", "-", "VgNew"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"NmEff", "=", 
+           RowBox[{"Nm", " ", 
+            RowBox[{"Exp", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"-", "2"}], "/", "9"}], " ", 
+              RowBox[{"VBgen", "/", "Vs"}]}], "]"}]}]}], ";", 
+          "\[IndentingNewLine]", "\[IndentingNewLine]", 
+          RowBox[{"pmean1", "=", 
+           RowBox[{"metaP", "[", 
+            RowBox[{"Nu", ",", " ", "NmEff", ",", " ", "NsEff1"}], "]"}]}], 
+          ";", "\[IndentingNewLine]", 
+          RowBox[{"pmean2", "=", 
+           RowBox[{"metaP", "[", 
+            RowBox[{"Nu", ",", " ", "NmEff", ",", " ", "NsEff2"}], "]"}]}], 
+          ";", "\[IndentingNewLine]", 
+          RowBox[{"pmean3", "=", 
+           RowBox[{"metaP", "[", 
+            RowBox[{"Nu", ",", " ", "NmEff", ",", " ", "NsEff3"}], "]"}]}], 
+          ";", "\[IndentingNewLine]", 
+          RowBox[{"HWnew1", "=", 
+           RowBox[{"HetDeme", "[", 
+            RowBox[{
+            "Nu", ",", "NmEff", ",", "  ", "NsEff1", ",", " ", "pmean1"}], 
+            "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"HWnew2", "=", 
+           RowBox[{"HetDeme", "[", 
+            RowBox[{
+            "Nu", ",", "NmEff", ",", "  ", "NsEff2", ",", " ", "pmean2"}], 
+            "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"HWnew3", "=", 
+           RowBox[{"HetDeme", "[", 
+            RowBox[{
+            "Nu", ",", "NmEff", ",", "  ", "NsEff3", ",", " ", "pmean3"}], 
+            "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"VgNew", "=", 
+           RowBox[{
+            RowBox[{"HWnew1", "*", 
+             RowBox[{"a1", "^", "2"}], "*", "L", "*", "0.6"}], "+", 
+            RowBox[{"HWnew2", "*", 
+             RowBox[{"a2", "^", "2"}], "*", "L", "*", "0.3"}], "+", 
+            RowBox[{"HWnew3", "*", 
+             RowBox[{"a3", "^", "2"}], "*", "L", "*", "0.1"}]}]}], ";"}]}], 
+        "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{
+        "NmEff", ",", "NsEff1", ",", " ", "NsEff2", ",", "NsEff3", ",", 
+         "pmean1", ",", " ", "pmean2", ",", "pmean3", ",", "HWnew1", ",", " ",
+          "HWnew2", ",", " ", "HWnew3"}], "}"}]}], ")"}]}], ";"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.981345916361458*^9, 3.9813459975563717`*^9}, {
+  3.981346209049033*^9, 3.981346212436655*^9}, {3.981346277218112*^9, 
+  3.98134628910152*^9}, {3.981346533385602*^9, 3.981346536248378*^9}, {
+  3.981347497315625*^9, 
+  3.9813475461561317`*^9}},ExpressionUUID->"0931be1c-ec84-4a16-8ec1-\
+adb0b89fe66f"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"Figure", " ", "3", "c"}],
+     FontWeight->"Bold"], 
+    StyleBox[",",
+     FontWeight->"Bold"], 
+    StyleBox[
+     RowBox[{"3", "d"}],
+     FontWeight->"Bold"], 
+    StyleBox[",",
+     FontWeight->"Bold"], 
+    RowBox[{
+     StyleBox[
+      RowBox[{"3", "e", " ", 
+       RowBox[{"(", 
+        RowBox[{"solid", " ", "lines"}], ")"}]}],
+      FontWeight->"Bold"], ";", " ", 
+     RowBox[{
+     "E\:fb00ect", " ", "of", " ", "stabilizing", " ", "selection", " ", 
+      "and", " ", "population", " ", "structure", " ", "for", " ", "an", " ", 
+      "additive", " ", "trait", " ", "influenced", " ", "by", " ", "unequal", 
+      " ", "loci"}], ";", " ", 
+     RowBox[{"mixed", " ", "effect", " ", 
+      RowBox[{"sizes", "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"pmeanHW", "[", 
+     RowBox[{
+     "Nu_", ",", " ", "Ns_", ",", " ", "Nm_", ",", " ", "Vg_", ",", "Vs_"}], 
+     "]"}], ":=", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"X", "=", 
+       FractionBox["Vs", "Vg"]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"deducVg", "=", 
+       FractionBox[
+        RowBox[{"3", "+", "X", "-", 
+         RadicalBox[
+          RowBox[{"1", "+", 
+           RowBox[{"6", "X"}], "+", 
+           SuperscriptBox["X", "2"]}], "2"]}], "4"]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"NsEff", "=", 
+       RowBox[{"Ns", 
+        RowBox[{
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"1", "-", "deducVg"}], ")"}], "2"], "/", 
+         RowBox[{"(", 
+          RowBox[{"1", "+", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"1", "-", "deducVg"}], ")"}], "/", "X"}]}], ")"}]}]}]}], 
+      ";", "\[IndentingNewLine]", 
+      RowBox[{"pmean", "=", 
+       RowBox[{"metaP", "[", 
+        RowBox[{"Nu", ",", " ", "Nm", ",", " ", "NsEff"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"HW", "=", 
+       RowBox[{"HetDeme", "[", 
+        RowBox[{"Nu", ",", " ", "Nm", ",", " ", "NsEff", ",", " ", "pmean"}], 
+        "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"{", " ", 
+       RowBox[{"NsEff", ",", " ", "pmean", ",", " ", "HW"}], "}"}]}], 
+     "\[IndentingNewLine]", ")"}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"mixVgenic", "[", 
+     RowBox[{
+     "NsPerLoc_", ",", " ", "aSquareValues_", ",", " ", "Nu_", ",", "Nm_", 
+      ",", "L_", ",", "demeSize_", ",", " ", "Vs_"}], "]"}], ":=", 
+    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"pmeans", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"metaP", "[", 
+          RowBox[{"Nu", ",", " ", "Nm", ",", " ", "#"}], "]"}], "&"}], "/@", 
+        " ", "NsPerLoc"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Vgenic", "=", "0"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Vt", "=", "0"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"l", "=", "1"}], ",", " ", 
+        RowBox[{"l", "<=", 
+         RowBox[{"Length", "[", "NsPerLoc", "]"}]}], ",", " ", 
+        RowBox[{"l", "=", 
+         RowBox[{"l", "+", "1"}]}], ",", 
+        RowBox[{
+         RowBox[{"Vgenic", "=", 
+          RowBox[{"Vgenic", "+", 
+           RowBox[{
+            RowBox[{"HetDeme", "[", 
+             RowBox[{"Nu", ",", " ", "Nm", ",", " ", 
+              RowBox[{"NsPerLoc", "[", 
+               RowBox[{"[", "l", "]"}], "]"}], ",", " ", 
+              RowBox[{"pmeans", "[", 
+               RowBox[{"[", "l", "]"}], "]"}]}], "]"}], "*", 
+            RowBox[{"aSquareValues", "[", 
+             RowBox[{"[", "l", "]"}], "]"}]}]}]}], ";", 
+         RowBox[{"Vt", "=", 
+          RowBox[{"Vt", "+", 
+           RowBox[{"2", 
+            RowBox[{"pmeans", "[", 
+             RowBox[{"[", "l", "]"}], "]"}], 
+            RowBox[{"(", 
+             RowBox[{"1", "-", 
+              RowBox[{"pmeans", "[", 
+               RowBox[{"[", "l", "]"}], "]"}]}], ")"}], 
+            RowBox[{"aSquareValues", "[", 
+             RowBox[{"[", "l", "]"}], "]"}]}]}]}]}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Vt", "-", "Vgenic"}], ",", " ", "Vgenic"}], "}"}]}], ")"}]}],
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"iterateVgenic", "[", 
+     RowBox[{
+     "NsPerLoc_", ",", " ", "Nu_", ",", "Nm_", ",", "L_", ",", "demeSize_", 
+      ",", " ", "Vs_", ",", " ", "iteration_"}], "]"}], ":=", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"aSquareValues", "=", 
+       RowBox[{"NsPerLoc", "*", "2", 
+        RowBox[{"Vs", "/", "demeSize"}]}]}], ";", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"VBgen", ",", " ", "Vg"}], "}"}], "=", 
+       RowBox[{"mixVgenic", "[", 
+        RowBox[{
+        "NsPerLoc", ",", "aSquareValues", ",", " ", "Nu", ",", " ", "Nm", ",",
+          " ", "L", ",", "demeSize", ",", " ", "Vs"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "1"}], ",", " ", 
+        RowBox[{"i", "<=", "iteration"}], ",", " ", 
+        RowBox[{"i", "=", 
+         RowBox[{"i", "+", "1"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"X", "=", 
+          FractionBox["Vs", "Vg"]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"deducVg", "=", 
+          FractionBox[
+           RowBox[{"3", "+", "X", "-", 
+            RadicalBox[
+             RowBox[{"1", "+", 
+              RowBox[{"6", "X"}], "+", 
+              SuperscriptBox["X", "2"]}], "2"]}], "4"]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"NsPerLocEff", "=", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"#", 
+             RowBox[{
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{"1", "-", "deducVg"}], ")"}], "2"], "/", 
+              RowBox[{"(", 
+               RowBox[{"1", "+", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"1", "-", "deducVg"}], ")"}], "/", "X"}]}], 
+               ")"}]}]}], "&"}], "/@", " ", "NsPerLoc"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"NmEff", "=", 
+          RowBox[{"Nm", " ", 
+           RowBox[{"Exp", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"-", "2"}], "/", "9"}], " ", 
+             RowBox[{"VBgen", "/", "Vs"}]}], "]"}]}]}], ";", 
+         RowBox[{"Print", "[", "NmEff", "]"}], ";", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"VBgen", ",", " ", "Vg"}], "}"}], "=", 
+          RowBox[{"mixVgenic", "[", 
+           RowBox[{
+           "NsPerLocEff", ",", " ", "aSquareValues", ",", " ", "Nu", ",", " ",
+             "NmEff", ",", " ", "L", ",", "demeSize", ",", " ", "Vs"}], 
+           "]"}]}], ";"}]}], "]"}], ";", 
+      RowBox[{"{", 
+       RowBox[{"NmEff", ",", "VBgen", ",", " ", "Vg"}], "}"}]}], ")"}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"L", "=", "200"}], ";", 
+    RowBox[{"demeSize", "=", "200"}], ";", 
+    RowBox[{"uL", "=", "0.01"}], ";", 
+    RowBox[{"NsMean", "=", "2"}], ";", 
+    RowBox[{"Nu", "=", "0.01"}], ";", 
+    RowBox[{"Vs", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Import", " ", "the", " ", "effect", " ", "sizes", " ", "in", " ", 
+     "simulations", " ", "to", " ", "caculated", " ", "genic", " ", 
+     RowBox[{"variance", "."}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"dataEffSize", "=", 
+     RowBox[{
+     "Import", "[", 
+      "\"\</Users/lijuan/Desktop/polygenicAdaptation/data/stabSel_diffEff/\
+mixEff/simu/Nu0.01_Vs1_aExpNuL_L200_N200_D100.effSize\>\"", "]"}]}], ";"}], 
+   " ", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Nm", "=", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0.1", ",", "0.5", ",", "2", ",", "10"}], "}"}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"m", "=", "5"}], ",", " ", 
+     RowBox[{"m", "<=", "5"}], ",", 
+     RowBox[{"m", "=", 
+      RowBox[{"m", "+", "1"}]}], ",", 
+     RowBox[{
+      RowBox[{"NsPerLoc", "=", 
+       RowBox[{"demeSize", "*", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"dataEffSize", "[", 
+           RowBox[{"[", "m", "]"}], "]"}], "^", "2"}], "/", 
+         RowBox[{"(", 
+          RowBox[{"2", " ", "Vs"}], ")"}]}]}]}], ";", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"NmEff", ",", "VBgen", ",", "Vg"}], "}"}], "=", 
+       RowBox[{"iterateVgenic", "[", 
+        RowBox[{"NsPerLoc", ",", " ", "Nu", ",", 
+         RowBox[{"Nm", "[", 
+          RowBox[{"[", "m", "]"}], "]"}], ",", "L", ",", "demeSize", ",", " ",
+          "Vs", ",", "5"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{"{", 
+        RowBox[{"NmEff", ",", "VBgen", ",", "Vg"}], "}"}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"dat1", "=", 
+       RowBox[{
+        RowBox[{"Join", "[", 
+         RowBox[{
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"Flatten", "[", 
+             RowBox[{"{", 
+              RowBox[{"Ns", ",", "NmEff", ",", " ", 
+               RowBox[{"pmeanHW", "[", 
+                RowBox[{
+                "Nu", ",", " ", "Ns", ",", " ", "NmEff", ",", " ", "Vg", ",", 
+                 "Vs"}], "]"}]}], "}"}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"Ns", ",", "0", ",", "0.015", ",", " ", "0.001"}], 
+             "}"}]}], "]"}], ",", " ", "\[IndentingNewLine]", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"Flatten", "[", 
+             RowBox[{"{", 
+              RowBox[{"Ns", ",", "NmEff", ",", " ", 
+               RowBox[{"pmeanHW", "[", 
+                RowBox[{
+                "Nu", ",", " ", "Ns", ",", " ", "NmEff", ",", " ", "Vg", ",", 
+                 " ", "Vs"}], "]"}]}], "}"}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"Ns", ",", "0.02", ",", "0.5", ",", " ", "0.005"}], 
+             "}"}]}], "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"Flatten", "[", 
+             RowBox[{"{", 
+              RowBox[{"Ns", ",", "NmEff", ",", " ", 
+               RowBox[{"pmeanHW", "[", 
+                RowBox[{
+                "Nu", ",", " ", "Ns", ",", "NmEff", ",", " ", "Vg", ",", " ", 
+                 "Vs"}], "]"}]}], "}"}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"Ns", ",", "0.51", ",", "1", ",", " ", "0.01"}], "}"}]}],
+            "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"Flatten", "[", 
+             RowBox[{"{", 
+              RowBox[{"Ns", ",", " ", "NmEff", ",", 
+               RowBox[{"pmeanHW", "[", 
+                RowBox[{
+                "Nu", ",", " ", "Ns", ",", " ", "NmEff", ",", " ", "Vg", ",", 
+                 "Vs"}], "]"}]}], "}"}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"Ns", ",", "1.1", ",", "5", ",", " ", "0.1"}], "}"}]}], 
+           "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"Flatten", "[", 
+             RowBox[{"{", 
+              RowBox[{"Ns", ",", "NmEff", ",", 
+               RowBox[{"pmeanHW", "[", 
+                RowBox[{
+                "Nu", ",", " ", "Ns", ",", " ", "NmEff", ",", " ", "Vg", ",", 
+                 "Vs"}], "]"}]}], "}"}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"Ns", ",", "5.2", ",", "10", ",", "0.2"}], "}"}]}], 
+           "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"Flatten", "[", 
+             RowBox[{"{", 
+              RowBox[{"Ns", ",", " ", "NmEff", ",", 
+               RowBox[{"pmeanHW", "[", 
+                RowBox[{
+                "Nu", ",", " ", "Ns", ",", " ", "NmEff", ",", " ", "Vg", ",", 
+                 "Vs"}], "]"}]}], "}"}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"Ns", ",", "11", ",", "15", ",", "1"}], "}"}]}], "]"}]}],
+          "\[IndentingNewLine]", "]"}], "//", "N"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Export", "[", 
+       RowBox[{
+        RowBox[{"StringJoin", "[", 
+         RowBox[{"\"\<Nu\>\"", ",", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"Nu", ",", " ", "InputForm"}], "]"}], ",", "\"\<_uL\>\"", 
+          ",", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"uL", ",", " ", "InputForm"}], "]"}], ",", "\"\<_Nm\>\"", 
+          ",", 
+          RowBox[{"ToString", "[", 
+           RowBox[{
+            RowBox[{"Nm", "[", 
+             RowBox[{"[", "m", "]"}], "]"}], ",", " ", "InputForm"}], "]"}], 
+          ",", "  ", "\"\<_mixEffSize_Ns_NmEff_NsEff_pmean_HW.i5.dat\>\""}], 
+         "]"}], ",", "  ", "dat1"}], "]"}]}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.981346002842684*^9, 3.981346003024435*^9}, {
+  3.981346046580641*^9, 3.981346051921093*^9}, {3.9813462999904137`*^9, 
+  3.9813463203870783`*^9}, {3.9813466670751257`*^9, 3.981346767759254*^9}, {
+  3.981346843094748*^9, 
+  3.981346849618505*^9}},ExpressionUUID->"63b5246e-b6ed-4d2f-a23a-\
+7786365f52d1"],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Distribution", " ", "of", " ", "variance", " ", "contributions", " ", 
+     "of", " ", "trait", " ", "loci"}], ";", " ", 
+    RowBox[{"eq", ".4"}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"P", "[", 
+      RowBox[{
+      "z_", ",", " ", "Nu_", ",", " ", "Nm_", ",", "Ns_", ",", " ", 
+       "Pmean_"}], "]"}], ":=", 
+     RowBox[{"FullSimplify", "[", 
+      RowBox[{
+       FractionBox["1", 
+        RowBox[{"Ns", " ", 
+         SqrtBox[
+          RowBox[{"1", "-", 
+           FractionBox[
+            RowBox[{"4", " ", "Nu", " ", "z"}], "Ns"]}]]}]], "Nu", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"fnorm", "[", 
+          RowBox[{
+           RowBox[{
+            FractionBox["1", "2"], 
+            RowBox[{"(", 
+             RowBox[{"1", "-", 
+              FractionBox[
+               SqrtBox[
+                RowBox[{"Ns", "-", 
+                 RowBox[{"4", " ", "Nu", " ", "z"}]}]], 
+               SqrtBox["Ns"]]}], ")"}]}], ",", " ", "Nu", ",", " ", "Nm", ",",
+            "Ns", ",", "Pmean"}], "]"}], "+", 
+         RowBox[{"fnorm", "[", 
+          RowBox[{
+           RowBox[{
+            FractionBox["1", "2"], " ", 
+            RowBox[{"(", 
+             RowBox[{"1", "+", 
+              FractionBox[
+               SqrtBox[
+                RowBox[{"Ns", "-", 
+                 RowBox[{"4", " ", "Nu", " ", "z"}]}]], 
+               SqrtBox["Ns"]]}], ")"}]}], ",", " ", "Nu", ",", "Nm", ",", 
+           "Ns", ",", " ", "Pmean"}], "]"}]}], ")"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"F", 
+      RowBox[{"(", "v", ")"}]}], ",", " ", 
+     RowBox[{
+     "the", " ", "probability", " ", "of", " ", "a", " ", "trait", " ", 
+      "locus", " ", "with", " ", "selective", " ", "e\:fb00ect", " ", "s", 
+      " ", "contributes", " ", "an", " ", "amount", " ", "exceeding", " ", 
+      "y", " ", 
+      RowBox[{"(", 
+       RowBox[{"in", " ", "units", " ", "of", " ", "v\:2217"}], ")"}], " ", 
+      "to", " ", "the", " ", "genic", " ", "variance", " ", "within", " ", 
+      "a", " ", "deme"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"F", "[", 
+      RowBox[{
+      "y_", ",", " ", "Nu_", ",", " ", "Nm_", ",", " ", "Ns_", ",", " ", 
+       "Pmean_"}], "]"}], ":=", 
+     RowBox[{"(", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"y", "<=", " ", 
+         FractionBox["Ns", 
+          RowBox[{"4", "Nu"}]]}], ",", 
+        RowBox[{"NIntegrate", "[", 
+         RowBox[{
+          RowBox[{"P", "[", 
+           RowBox[{
+           "z", ",", " ", "Nu", ",", "Nm", ",", " ", "Ns", ",", " ", 
+            "Pmean"}], "]"}], ",", " ", 
+          RowBox[{"{", 
+           RowBox[{"z", ",", " ", "y", ",", " ", 
+            FractionBox["Ns", 
+             RowBox[{"4", "Nu"}]]}], "}"}]}], "]"}], "  ", ",", "0"}], "]"}], 
+      ")"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Proportion", " ", "of", " ", "within"}], "-", 
+     RowBox[{
+     "deme", " ", "genic", " ", "variance", " ", "explained", " ", "by", " ", 
+      "loci", " ", "with", " ", "variance", " ", "exceeding"}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"VgDist", "[", 
+      RowBox[{
+      "y_", ",", " ", "Nu_", ",", " ", "Nm_", ",", " ", "Ns_", ",", " ", 
+       "Pmean_"}], "]"}], ":=", 
+     RowBox[{"NIntegrate", "[", 
+      RowBox[{
+       RowBox[{"z", " ", 
+        RowBox[{"P", "[", 
+         RowBox[{
+         "z", ",", " ", "Nu", ",", "Nm", ",", " ", "Ns", ",", " ", "Pmean"}], 
+         "]"}]}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"z", ",", " ", "y", ",", " ", 
+         FractionBox["Ns", 
+          RowBox[{"4", "Nu"}]]}], "}"}]}], "]"}]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.981346785587984*^9, 3.981346798774898*^9}, {
+  3.981346899660014*^9, 3.981346908568325*^9}, {3.9813469404108753`*^9, 
+  3.98134694060122*^9}, {3.981347624945218*^9, 3.98134762816835*^9}, {
+  3.981347694065987*^9, 3.981347738322682*^9}, {3.981347769635622*^9, 
+  3.981347948600994*^9}, {3.981348017597518*^9, 3.981348029432988*^9}, {
+  3.981349159519882*^9, 3.981349197147591*^9}, {3.9813494324630947`*^9, 
+  3.98134944188793*^9}},ExpressionUUID->"674cbd1d-7c3b-46e9-ac53-\
+d45ee56ac305"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"Figure", " ", "4", "a"}],
+     FontWeight->"Bold"], 
+    StyleBox[",",
+     FontWeight->"Bold"], 
+    RowBox[{
+     StyleBox[
+      RowBox[{"4", "c"}],
+      FontWeight->"Bold"], 
+     StyleBox[";",
+      FontWeight->"Bold"], 
+     StyleBox[" ",
+      FontWeight->"Bold"], 
+     RowBox[{"F", 
+      RowBox[{"(", "v", ")"}], " ", "for", " ", "e", "qual", " ", "effect", 
+      " ", "sizes"}], ";", 
+     StyleBox[" ",
+      FontWeight->"Bold"], 
+     RowBox[{"LE", " ", "predictions", " ", 
+      RowBox[{"(", 
+       RowBox[{"dotted", " ", "lines"}], ")"}]}]}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"outFv", "[", 
+     RowBox[{"Nu_", ",", " ", "Ns_", ",", " ", "Nm_"}], "]"}], ":=", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"upper", "=", 
+       FractionBox["Ns", 
+        RowBox[{"4", "Nu"}]]}], ";", " ", 
+      RowBox[{"lower", "=", 
+       RowBox[{
+        RowBox[{"Ns", "/", "Nu"}], " ", "*", 
+        RowBox[{"1", "/", "400"}], "*", 
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          RowBox[{"1", "/", "400"}]}], ")"}]}]}], ";", 
+      RowBox[{"step", "=", 
+       RowBox[{"upper", "/", "250"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"pMean", "=", 
+       RowBox[{"metaP", "[", 
+        RowBox[{"Nu", ",", " ", "Nm", ",", " ", "Ns"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"dat", "=", 
+       RowBox[{
+        RowBox[{"Join", "[", 
+         RowBox[{
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"y", ",", " ", 
+              RowBox[{"F", "[", 
+               RowBox[{
+               "y", ",", " ", "Nu", ",", " ", "Nm", ",", "Ns", ",", " ", 
+                "pMean"}], "]"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"y", ",", "lower", ",", "2", ",", " ", "0.005"}], 
+             "}"}]}], "]"}], ",", " ", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Round", "[", 
+               RowBox[{"y", ",", " ", "0.001"}], "]"}], ",", " ", 
+              RowBox[{"F", "[", 
+               RowBox[{
+                RowBox[{"Round", "[", 
+                 RowBox[{"y", ",", " ", "0.001"}], "]"}], ",", " ", "Nu", ",",
+                 " ", "Nm", ",", "Ns", ",", " ", "pMean"}], "]"}]}], "}"}], 
+            ",", 
+            RowBox[{"{", 
+             RowBox[{"y", ",", 
+              RowBox[{"2", "+", "step"}], ",", "upper", ",", " ", "step"}], 
+             "}"}]}], "]"}]}], "]"}], "//", "N"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Export", "[", 
+       RowBox[{
+        RowBox[{"StringJoin", "[", 
+         RowBox[{"\"\<Fy_Nu\>\"", ",", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"Nu", ",", " ", "InputForm"}], "]"}], ",", "\"\<_Nm\>\"", 
+          ",", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"Nm", ",", " ", "InputForm"}], "]"}], " ", ",", " ", 
+          "\"\<_Ns\>\"", ",", " ", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"Ns", ",", " ", "InputForm"}], "]"}], ",", " ", 
+          "\"\<.dat\>\""}], "]"}], ",", " ", "dat"}], "]"}]}], ")"}]}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Nu", "=", "0.01"}], ";", " ", 
+    RowBox[{"Ns", "=", 
+     RowBox[{"{", 
+      RowBox[{"0.2", ",", " ", "1", ",", " ", "5"}], "}"}]}], ";", " ", 
+    RowBox[{"Nm", "=", 
+     RowBox[{"{", 
+      RowBox[{
+      "0", ",", " ", "0.1", ",", "0.25", ",", " ", "2", ",", " ", "10"}], 
+      "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"NmCrit", "=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "0.2875", ",", " ", "0.088765207618", ",", " ", 
+         "0.046083603164263603"}], "}"}], " ", "for", " ", "Ns"}], "=", 
+      RowBox[{"{", 
+       RowBox[{"0.2", ",", " ", "1", ",", " ", "5"}], "}"}]}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"i", "=", "1"}], ",", 
+     RowBox[{"i", "<", "3"}], ",", 
+     RowBox[{"i", "++"}], ",", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"j", "=", "2"}], ",", 
+       RowBox[{"j", "<", "3"}], ",", 
+       RowBox[{"j", "++"}], ",", 
+       RowBox[{"outFv", "[", 
+        RowBox[{"Nu", ",", " ", 
+         RowBox[{"Ns", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], ",", " ", 
+         RowBox[{"Nm", "[", 
+          RowBox[{"[", "j", "]"}], "]"}]}], "]"}]}], "]"}]}], "]"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     StyleBox[
+      RowBox[{"Figure", " ", "4", "a"}],
+      FontWeight->"Bold"], 
+     StyleBox[",",
+      FontWeight->"Bold"], 
+     RowBox[{
+      StyleBox[
+       RowBox[{"4", "c"}],
+       FontWeight->"Bold"], 
+      StyleBox[";",
+       FontWeight->"Bold"], 
+      StyleBox[" ",
+       FontWeight->"Bold"], 
+      RowBox[{"LD", " ", "predictions", " ", 
+       RowBox[{"(", 
+        RowBox[{"solid", " ", "lines"}], ")"}]}]}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"outFvSeff", "[", 
+     RowBox[{
+     "Nu_", ",", " ", "Ns_", ",", " ", "Nm_", ",", "NmEff_", ",", " ", 
+      "NsEff_"}], "]"}], ":=", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"upper", "=", 
+       FractionBox["Ns", 
+        RowBox[{"4", "Nu"}]]}], ";", " ", 
+      RowBox[{"lower", "=", 
+       RowBox[{
+        RowBox[{"Ns", "/", "Nu"}], " ", "*", 
+        RowBox[{"1", "/", "400"}], "*", 
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          RowBox[{"1", "/", "400"}]}], ")"}]}]}], ";", 
+      RowBox[{"step", "=", 
+       RowBox[{"upper", "/", "250"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"pMean", "=", 
+       RowBox[{"metaP", "[", 
+        RowBox[{"Nu", ",", " ", "NmEff", ",", " ", "NsEff"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"dat", "=", 
+       RowBox[{
+        RowBox[{"Join", "[", 
+         RowBox[{
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"y", ",", " ", 
+              RowBox[{"F", "[", 
+               RowBox[{
+                RowBox[{"y", " ", 
+                 RowBox[{"NsEff", "/", "Ns"}]}], ",", " ", "Nu", ",", " ", 
+                "NmEff", ",", "NsEff", ",", " ", "pMean"}], "]"}]}], "}"}], 
+            ",", 
+            RowBox[{"{", 
+             RowBox[{"y", ",", "lower", ",", "2", ",", " ", "0.005"}], 
+             "}"}]}], "]"}], ",", " ", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Round", "[", 
+               RowBox[{"y", ",", " ", "0.001"}], "]"}], ",", " ", 
+              RowBox[{"F", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"Round", "[", 
+                  RowBox[{"y", ",", " ", "0.001"}], "]"}], " ", 
+                 RowBox[{"NsEff", "/", "Ns"}]}], ",", " ", "Nu", ",", " ", 
+                "NmEff", ",", "NsEff", ",", " ", "pMean"}], "]"}]}], "}"}], 
+            ",", 
+            RowBox[{"{", 
+             RowBox[{"y", ",", 
+              RowBox[{"2", "+", "step"}], ",", "upper", ",", " ", "step"}], 
+             "}"}]}], "]"}]}], "]"}], "//", "N"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Export", "[", 
+       RowBox[{
+        RowBox[{"StringJoin", "[", 
+         RowBox[{"\"\<Fy_Nu\>\"", ",", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"Nu", ",", " ", "InputForm"}], "]"}], ",", "\"\<_Nm\>\"", 
+          ",", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"Nm", ",", " ", "InputForm"}], "]"}], " ", ",", " ", 
+          "\"\<_Ns\>\"", ",", " ", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"Ns", ",", " ", "InputForm"}], "]"}], ",", " ", 
+          "\"\<.eff.dat\>\""}], "]"}], ",", " ", "dat"}], "]"}]}], ")"}]}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Nu", "=", "0.01"}], ";", " ", 
+    RowBox[{"Ns", "=", 
+     RowBox[{"{", 
+      RowBox[{"0.2", ",", " ", "1", ",", " ", "5"}], "}"}]}], ";", " ", 
+    RowBox[{"Nm", "=", 
+     RowBox[{"{", 
+      RowBox[{
+      "0", ",", " ", "0.1", ",", "0.25", ",", " ", "2", ",", " ", "10", ",", 
+       " ", "0.088765207618"}], "}"}]}], ";", 
+    RowBox[{"a", "=", "0.1"}], ";", " ", 
+    RowBox[{"demeSize", "=", "200"}], ";", " ", 
+    RowBox[{"L", "=", "200"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"i", "=", "2"}], ",", 
+     RowBox[{"i", "<=", "2"}], ",", 
+     RowBox[{"i", "++"}], ",", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"j", "=", "4"}], ",", 
+       RowBox[{"j", "<=", "4"}], ",", 
+       RowBox[{"j", "++"}], ",", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"NmEff", ",", " ", "NsEff"}], "}"}], "=", 
+         RowBox[{"HWeff", "[", 
+          RowBox[{"Nu", ",", " ", 
+           RowBox[{"Nm", "[", 
+            RowBox[{"[", "j", "]"}], "]"}], ",", " ", 
+           RowBox[{"Ns", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], ",", " ", "a", ",", " ", 
+           "demeSize", ",", "L"}], "]"}]}], ";", 
+        RowBox[{"outFvSeff", "[", 
+         RowBox[{"Nu", ",", " ", 
+          RowBox[{"Ns", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], ",", 
+          RowBox[{"Nm", "[", 
+           RowBox[{"[", "j", "]"}], "]"}], ",", "NmEff", ",", " ", "NsEff"}], 
+         "]"}]}]}], "]"}]}], "]"}], "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.9813480913580112`*^9, 3.9813480915453672`*^9}, {
+  3.981348919016059*^9, 3.981349057465756*^9}, {3.981349138031986*^9, 
+  3.9813491501890287`*^9}, {3.981349201997513*^9, 3.981349268431718*^9}, {
+  3.981349427592766*^9, 
+  3.981349428101515*^9}},ExpressionUUID->"5fa8fc13-cd53-48f7-a41a-\
+0ccb0248822d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"Figure", " ", "4", "b"}],
+     FontWeight->"Bold"], 
+    StyleBox[",",
+     FontWeight->"Bold"], 
+    RowBox[{
+     StyleBox[
+      RowBox[{"4", "d"}],
+      FontWeight->"Bold"], 
+     StyleBox[";",
+      FontWeight->"Bold"], 
+     StyleBox[" ",
+      FontWeight->"Bold"], 
+     RowBox[{
+      RowBox[{"Proprotion", " ", "of", " ", "total", " ", "within"}], "-", 
+      RowBox[{"deme", " ", "genic", " ", "variance", " ", "for", 
+       StyleBox[" ",
+        FontWeight->"Bold"], "equal", " ", "effect", " ", "sizes"}]}], ";", 
+     StyleBox[" ",
+      FontWeight->"Bold"], 
+     RowBox[{"LE", " ", "predictions", " ", 
+      RowBox[{"(", 
+       RowBox[{"dotted", " ", "lines"}], ")"}]}]}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"outVg", "[", 
+     RowBox[{"Nu_", ",", " ", "Ns_", ",", " ", "Nm_"}], "]"}], ":=", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"upper", "=", 
+       FractionBox["Ns", 
+        RowBox[{"4", "Nu"}]]}], ";", " ", 
+      RowBox[{"lower", "=", 
+       RowBox[{
+        RowBox[{"Ns", "/", "Nu"}], " ", "*", 
+        RowBox[{"1", "/", "400"}], "*", 
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          RowBox[{"1", "/", "400"}]}], ")"}]}]}], ";", 
+      RowBox[{"step", "=", 
+       RowBox[{"upper", "/", "250"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"pMean", "=", 
+       RowBox[{"metaP", "[", 
+        RowBox[{"Nu", ",", " ", "Nm", ",", " ", "Ns"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"dat", "=", 
+       RowBox[{
+        RowBox[{"Join", "[", 
+         RowBox[{
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"y", ",", " ", 
+              RowBox[{"VgDist", "[", 
+               RowBox[{
+               "y", ",", " ", "Nu", ",", " ", "Nm", ",", "Ns", ",", " ", 
+                "pMean"}], "]"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"y", ",", "lower", ",", "2", ",", " ", "0.005"}], 
+             "}"}]}], "]"}], ",", " ", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Round", "[", 
+               RowBox[{"y", ",", " ", "0.001"}], "]"}], ",", " ", 
+              RowBox[{"VgDist", "[", 
+               RowBox[{
+                RowBox[{"Round", "[", 
+                 RowBox[{"y", ",", " ", "0.001"}], "]"}], ",", " ", "Nu", ",",
+                 " ", "Nm", ",", "Ns", ",", " ", "pMean"}], "]"}]}], "}"}], 
+            ",", 
+            RowBox[{"{", 
+             RowBox[{"y", ",", 
+              RowBox[{"2", "+", "step"}], ",", "upper", ",", " ", "step"}], 
+             "}"}]}], "]"}]}], "]"}], "//", "N"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Export", "[", 
+       RowBox[{
+        RowBox[{"StringJoin", "[", 
+         RowBox[{"\"\<icdfVg_Nu\>\"", ",", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"Nu", ",", " ", "InputForm"}], "]"}], ",", "\"\<_Nm\>\"", 
+          ",", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"Nm", ",", " ", "InputForm"}], "]"}], " ", ",", " ", 
+          "\"\<_Ns\>\"", ",", " ", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"Ns", ",", " ", "InputForm"}], "]"}], ",", " ", 
+          "\"\<.dat\>\""}], "]"}], ",", " ", "dat"}], "]"}]}], ")"}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Nu", "=", "0.01"}], ";", " ", 
+    RowBox[{"Ns", "=", 
+     RowBox[{"{", 
+      RowBox[{"0.2", ",", " ", "1", ",", " ", "5"}], "}"}]}], ";", " ", 
+    RowBox[{"Nm", "=", 
+     RowBox[{"{", 
+      RowBox[{
+      "0", ",", " ", "0.1", ",", "0.25", ",", " ", "2", ",", " ", "10"}], 
+      "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"NmCrit", "=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "0.2875", ",", " ", "0.088765207618", ",", " ", 
+         "0.046083603164263603"}], "}"}], " ", "for", " ", "Ns"}], "=", 
+      RowBox[{"{", 
+       RowBox[{"0.2", ",", " ", "1", ",", " ", "5"}], "}"}]}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"i", "=", "1"}], ",", 
+     RowBox[{"i", "<", "3"}], ",", 
+     RowBox[{"i", "++"}], ",", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"j", "=", "2"}], ",", 
+       RowBox[{"j", "<", "3"}], ",", 
+       RowBox[{"j", "++"}], ",", 
+       RowBox[{"outFv", "[", 
+        RowBox[{"Nu", ",", " ", 
+         RowBox[{"Ns", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], ",", " ", 
+         RowBox[{"Nm", "[", 
+          RowBox[{"[", "j", "]"}], "]"}]}], "]"}]}], "]"}]}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     StyleBox[
+      RowBox[{"Figure", " ", "4", "b"}],
+      FontWeight->"Bold"], 
+     StyleBox[",",
+      FontWeight->"Bold"], 
+     RowBox[{
+      StyleBox[
+       RowBox[{"4", "d"}],
+       FontWeight->"Bold"], 
+      StyleBox[";",
+       FontWeight->"Bold"], 
+      StyleBox[" ",
+       FontWeight->"Bold"], 
+      RowBox[{"LD", " ", "predictions", " ", 
+       RowBox[{"(", 
+        RowBox[{"solid", " ", "lines"}], ")"}]}]}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"outVgSeff", "[", 
+     RowBox[{
+     "Nu_", ",", " ", "Ns_", ",", " ", "Nm_", ",", "NmEff_", ",", " ", 
+      "NsEff_"}], "]"}], ":=", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"upper", "=", 
+       FractionBox["Ns", 
+        RowBox[{"4", "Nu"}]]}], ";", " ", 
+      RowBox[{"lower", "=", 
+       RowBox[{
+        RowBox[{"Ns", "/", "Nu"}], " ", "*", 
+        RowBox[{"1", "/", "400"}], "*", 
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          RowBox[{"1", "/", "400"}]}], ")"}]}]}], ";", 
+      RowBox[{"step", "=", 
+       RowBox[{"upper", "/", "250"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"pMean", "=", 
+       RowBox[{"metaP", "[", 
+        RowBox[{"Nu", ",", " ", "NmEff", ",", " ", "NsEff"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"dat", "=", 
+       RowBox[{
+        RowBox[{"Join", "[", 
+         RowBox[{
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"y", ",", " ", 
+              RowBox[{"VgDist", "[", 
+               RowBox[{
+                RowBox[{"y", " ", 
+                 RowBox[{"NsEff", "/", "Ns"}]}], ",", " ", "Nu", ",", " ", 
+                "NmEff", ",", "NsEff", ",", " ", "pMean"}], "]"}]}], "}"}], 
+            ",", 
+            RowBox[{"{", 
+             RowBox[{"y", ",", "lower", ",", "2", ",", " ", "0.005"}], 
+             "}"}]}], "]"}], ",", " ", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Round", "[", 
+               RowBox[{"y", ",", " ", "0.001"}], "]"}], ",", " ", 
+              RowBox[{"VgDist", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"Round", "[", 
+                  RowBox[{"y", ",", " ", "0.001"}], "]"}], 
+                 RowBox[{"NsEff", "/", "Ns"}]}], ",", " ", "Nu", ",", " ", 
+                "NmEff", ",", "NsEff", ",", " ", "pMean"}], "]"}]}], "}"}], 
+            ",", 
+            RowBox[{"{", 
+             RowBox[{"y", ",", 
+              RowBox[{"2", "+", "step"}], ",", "upper", ",", " ", "step"}], 
+             "}"}]}], "]"}]}], "]"}], "//", "N"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Export", "[", 
+       RowBox[{
+        RowBox[{"StringJoin", "[", 
+         RowBox[{"\"\<icdfVg_Nu\>\"", ",", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"Nu", ",", " ", "InputForm"}], "]"}], ",", "\"\<_Nm\>\"", 
+          ",", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"Nm", ",", " ", "InputForm"}], "]"}], " ", ",", " ", 
+          "\"\<_Ns\>\"", ",", " ", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"Ns", ",", " ", "InputForm"}], "]"}], ",", " ", 
+          "\"\<.eff.dat\>\""}], "]"}], ",", " ", "dat"}], "]"}]}], ")"}]}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Nu", "=", "0.01"}], ";", " ", 
+    RowBox[{"Ns", "=", 
+     RowBox[{"{", 
+      RowBox[{"0.2", ",", " ", "1", ",", " ", "5"}], "}"}]}], ";", " ", 
+    RowBox[{"Nm", "=", 
+     RowBox[{"{", 
+      RowBox[{
+      "0", ",", " ", "0.1", ",", "0.25", ",", " ", "2", ",", " ", "10", ",", 
+       " ", "0.088765207618"}], "}"}]}], ";", 
+    RowBox[{"a", "=", "0.1"}], ";", " ", 
+    RowBox[{"demeSize", "=", "200"}], ";", " ", 
+    RowBox[{"L", "=", "200"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"i", "=", "2"}], ",", 
+     RowBox[{"i", "<=", "2"}], ",", 
+     RowBox[{"i", "++"}], ",", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"j", "=", "4"}], ",", 
+       RowBox[{"j", "<=", "4"}], ",", 
+       RowBox[{"j", "++"}], ",", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"{", " ", 
+          RowBox[{"NmEff", ",", "NsEff"}], "}"}], "=", 
+         RowBox[{"HWeff", "[", 
+          RowBox[{"Nu", ",", " ", 
+           RowBox[{"Nm", "[", 
+            RowBox[{"[", "j", "]"}], "]"}], ",", " ", 
+           RowBox[{"Ns", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], ",", " ", "a", ",", " ", 
+           "demeSize", ",", "L"}], "]"}]}], ";", 
+        RowBox[{"outVgSeff", "[", 
+         RowBox[{"Nu", ",", " ", 
+          RowBox[{"Ns", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], ",", " ", 
+          RowBox[{"Nm", "[", 
+           RowBox[{"[", "j", "]"}], "]"}], ",", "NmEff", ",", " ", "NsEff"}], 
+         "]"}]}]}], "]"}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.981346785587984*^9, 3.981346798774898*^9}, {
+   3.981346899660014*^9, 3.981346908568325*^9}, {3.9813469404108753`*^9, 
+   3.98134694060122*^9}, {3.981347624945218*^9, 3.98134762816835*^9}, {
+   3.981347694065987*^9, 3.981347738322682*^9}, {3.981347769635622*^9, 
+   3.981347948600994*^9}, {3.981348017597518*^9, 3.9813480841479177`*^9}, {
+   3.981348226995895*^9, 3.981348228186153*^9}, {3.981348266915887*^9, 
+   3.9813484005853148`*^9}, {3.981348676127087*^9, 3.981348695709886*^9}, {
+   3.9813488083307962`*^9, 3.981348868681279*^9}, {3.981348943574937*^9, 
+   3.9813490060038424`*^9}, 3.9813491531995983`*^9, {3.9813492708062572`*^9, 
+   3.981349276986271*^9}},ExpressionUUID->"99a5b54e-d3f4-4172-bb64-\
+96d6a16cb589"],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"F", 
+    RowBox[{"(", "v", ")"}], " ", "for", " ", "mixed", " ", "effect", " ", 
+    "sizes"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"ClearAll", "[", "\"\<Global`*\>\"", "]"}], "\[IndentingNewLine]", 
+   
+   RowBox[{
+    RowBox[{
+     RowBox[{"f", "[", 
+      RowBox[{"p_", ",", "Nu_", ",", "Nm_", ",", "Ns_", ",", "Pmean_"}], 
+      "]"}], ":=", 
+     RowBox[{
+      RowBox[{"Exp", "[", 
+       RowBox[{
+        RowBox[{"-", "4"}], "*", "Ns", "*", "p", "*", 
+        RowBox[{"(", 
+         RowBox[{"1", "-", "p"}], ")"}]}], "]"}], " ", 
+      SuperscriptBox["p", 
+       RowBox[{
+        RowBox[{"4", " ", "Nu"}], " ", "+", " ", 
+        RowBox[{"4", "Nm", " ", "Pmean"}], "-", "1"}]], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", "p"}], ")"}], 
+       RowBox[{
+        RowBox[{"4", " ", "Nu"}], " ", "+", " ", 
+        RowBox[{"4", " ", "Nm", " ", 
+         RowBox[{"(", 
+          RowBox[{"1", "-", " ", "Pmean"}], ")"}]}], "-", "1"}]]}]}], " ", 
+    ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"fnorm", "[", 
+      RowBox[{"p_", ",", "Nu_", ",", "Nm_", ",", "Ns_", ",", " ", "Pmean_"}], 
+      "]"}], ":=", 
+     RowBox[{
+      RowBox[{"f", "[", 
+       RowBox[{"p", ",", "Nu", ",", "Nm", ",", "Ns", ",", " ", "Pmean"}], 
+       "]"}], "/", 
+      RowBox[{"NIntegrate", "[", 
+       RowBox[{
+        RowBox[{"f", "[", 
+         RowBox[{"p0", ",", "Nu", ",", "Nm", ",", "Ns", ",", "Pmean"}], "]"}],
+         ",", 
+        RowBox[{"{", 
+         RowBox[{"p0", ",", "0", ",", "1"}], "}"}]}], "]"}]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Pbar", "[", 
+      RowBox[{"Nu_", ",", "Nm_", ",", "Ns_", ",", "Pmean_"}], "]"}], ":=", 
+     RowBox[{"NIntegrate", "[", 
+      RowBox[{
+       RowBox[{"p", "*", 
+        RowBox[{"fnorm", "[", 
+         RowBox[{"p", ",", "Nu", ",", "Nm", ",", "Ns", ",", " ", "Pmean"}], 
+         "]"}]}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"p", ",", "0", ",", "1"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"metaP", "[", 
+      RowBox[{"Nu_", ",", " ", "Nm_", ",", " ", "Ns_"}], "]"}], ":=", 
+     RowBox[{"pb", "/.", 
+      RowBox[{"FindRoot", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Pbar", "[", 
+          RowBox[{"Nu", ",", "Nm", ",", "Ns", ",", "pb"}], "]"}], "==", 
+         "pb"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"pb", ",", " ", "0.0001"}], "}"}]}], " ", "]"}]}]}], " ", 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"HetDeme", "[", 
+      RowBox[{"Nu_", ",", " ", "Nm_", ",", " ", "Ns_", ",", " ", "Pmean_"}], 
+      "]"}], ":=", " ", 
+     RowBox[{"NIntegrate", "[", 
+      RowBox[{
+       RowBox[{"2", "*", "p", "*", 
+        RowBox[{"(", 
+         RowBox[{"1", "-", "p"}], ")"}], "*", 
+        RowBox[{"fnorm", "[", 
+         RowBox[{"p", ",", "Nu", ",", "Nm", ",", " ", "Ns", ",", "Pmean"}], 
+         "]"}]}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"p", ",", "0", ",", "1"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"mixVgenic", "[", 
+     RowBox[{
+     "NsPerLoc_", ",", " ", "aSquareValues_", ",", " ", "Nu_", ",", "Nm_", 
+      ",", "L_", ",", "demeSize_", ",", " ", "Vs_"}], "]"}], ":=", 
+    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"pmeans", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"metaP", "[", 
+          RowBox[{"Nu", ",", " ", "Nm", ",", " ", "#"}], "]"}], "&"}], "/@", 
+        " ", "NsPerLoc"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Vgenic", "=", "0"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Vt", "=", "0"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"l", "=", "1"}], ",", " ", 
+        RowBox[{"l", "<=", 
+         RowBox[{"Length", "[", "NsPerLoc", "]"}]}], ",", " ", 
+        RowBox[{"l", "=", 
+         RowBox[{"l", "+", "1"}]}], ",", 
+        RowBox[{
+         RowBox[{"Vgenic", "=", 
+          RowBox[{"Vgenic", "+", 
+           RowBox[{
+            RowBox[{"HetDeme", "[", 
+             RowBox[{"Nu", ",", " ", "Nm", ",", " ", 
+              RowBox[{"NsPerLoc", "[", 
+               RowBox[{"[", "l", "]"}], "]"}], ",", " ", 
+              RowBox[{"pmeans", "[", 
+               RowBox[{"[", "l", "]"}], "]"}]}], "]"}], "*", 
+            RowBox[{"aSquareValues", "[", 
+             RowBox[{"[", "l", "]"}], "]"}]}]}]}], ";", 
+         RowBox[{"Vt", "=", 
+          RowBox[{"Vt", "+", 
+           RowBox[{"2", 
+            RowBox[{"pmeans", "[", 
+             RowBox[{"[", "l", "]"}], "]"}], 
+            RowBox[{"(", 
+             RowBox[{"1", "-", 
+              RowBox[{"pmeans", "[", 
+               RowBox[{"[", "l", "]"}], "]"}]}], ")"}], 
+            RowBox[{"aSquareValues", "[", 
+             RowBox[{"[", "l", "]"}], "]"}]}]}]}]}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Vt", "-", "Vgenic"}], ",", " ", "Vgenic"}], "}"}]}], ")"}]}],
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"iterateVgenic", "[", 
+     RowBox[{
+     "NsPerLoc_", ",", " ", "Nu_", ",", "Nm_", ",", "L_", ",", "demeSize_", 
+      ",", " ", "Vs_", ",", " ", "iteration_"}], "]"}], ":=", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"aSquareValues", "=", 
+       RowBox[{"NsPerLoc", "*", "2", 
+        RowBox[{"Vs", "/", "demeSize"}]}]}], ";", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"VBgen", ",", " ", "Vg"}], "}"}], "=", 
+       RowBox[{"mixVgenic", "[", 
+        RowBox[{
+        "NsPerLoc", ",", "aSquareValues", ",", " ", "Nu", ",", " ", "Nm", ",",
+          " ", "L", ",", "demeSize", ",", " ", "Vs"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "1"}], ",", " ", 
+        RowBox[{"i", "<=", "iteration"}], ",", " ", 
+        RowBox[{"i", "=", 
+         RowBox[{"i", "+", "1"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"X", "=", 
+          FractionBox["Vs", "Vg"]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"deducVg", "=", 
+          FractionBox[
+           RowBox[{"3", "+", "X", "-", 
+            RadicalBox[
+             RowBox[{"1", "+", 
+              RowBox[{"6", "X"}], "+", 
+              SuperscriptBox["X", "2"]}], "2"]}], "4"]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"NsPerLocEff", "=", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"#", 
+             RowBox[{
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{"1", "-", "deducVg"}], ")"}], "2"], "/", 
+              RowBox[{"(", 
+               RowBox[{"1", "+", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"1", "-", "deducVg"}], ")"}], "/", "X"}]}], 
+               ")"}]}]}], "&"}], "/@", " ", "NsPerLoc"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"NmEff", "=", 
+          RowBox[{"Nm", " ", 
+           RowBox[{"Exp", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"-", "2"}], "/", "9"}], " ", 
+             RowBox[{"VBgen", "/", "Vs"}]}], "]"}]}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"VBgen", ",", " ", "Vg"}], "}"}], "=", 
+          RowBox[{"mixVgenic", "[", 
+           RowBox[{
+           "NsPerLocEff", ",", " ", "aSquareValues", ",", " ", "Nu", ",", " ",
+             "NmEff", ",", " ", "L", ",", "demeSize", ",", " ", "Vs"}], 
+           "]"}]}], ";"}]}], "]"}], ";", 
+      RowBox[{"{", 
+       RowBox[{"NmEff", ",", "VBgen", ",", " ", "Vg"}], "}"}]}], ")"}]}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"NsEff", "[", 
+     RowBox[{"Nu_", ",", " ", "Ns_", ",", "  ", "Vg_", ",", " ", "Vs_"}], 
+     "]"}], ":=", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"X", "=", 
+       FractionBox["Vs", "Vg"]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"deducVg", "=", 
+       FractionBox[
+        RowBox[{"3", "+", "X", "-", 
+         RadicalBox[
+          RowBox[{"1", "+", 
+           RowBox[{"6", "X"}], "+", 
+           SuperscriptBox["X", "2"]}], "2"]}], "4"]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"effNs", "=", 
+       RowBox[{"Ns", 
+        RowBox[{
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"1", "-", "deducVg"}], ")"}], "2"], "/", 
+         RowBox[{"(", 
+          RowBox[{"1", "+", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"1", "-", "deducVg"}], ")"}], "/", "X"}]}], ")"}]}]}]}], 
+      ";", "\[IndentingNewLine]", "effNs"}], "\[IndentingNewLine]", ")"}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"P", "[", 
+     RowBox[{
+     "z_", ",", " ", "Nu_", ",", " ", "Nm_", ",", "Ns_", ",", " ", "Pmean_"}],
+      "]"}], ":=", 
+    RowBox[{"FullSimplify", "[", 
+     RowBox[{
+      FractionBox["1", 
+       RowBox[{"Ns", " ", 
+        SqrtBox[
+         RowBox[{"1", "-", 
+          FractionBox[
+           RowBox[{"4", " ", "Nu", " ", "z"}], "Ns"]}]]}]], "Nu", " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"fnorm", "[", 
+         RowBox[{
+          RowBox[{
+           FractionBox["1", "2"], 
+           RowBox[{"(", 
+            RowBox[{"1", "-", 
+             FractionBox[
+              SqrtBox[
+               RowBox[{"Ns", "-", 
+                RowBox[{"4", " ", "Nu", " ", "z"}]}]], 
+              SqrtBox["Ns"]]}], ")"}]}], ",", " ", "Nu", ",", " ", "Nm", ",", 
+          "Ns", ",", "Pmean"}], "]"}], "+", 
+        RowBox[{"fnorm", "[", 
+         RowBox[{
+          RowBox[{
+           FractionBox["1", "2"], " ", 
+           RowBox[{"(", 
+            RowBox[{"1", "+", 
+             FractionBox[
+              SqrtBox[
+               RowBox[{"Ns", "-", 
+                RowBox[{"4", " ", "Nu", " ", "z"}]}]], 
+              SqrtBox["Ns"]]}], ")"}]}], ",", " ", "Nu", ",", "Nm", ",", "Ns",
+           ",", " ", "Pmean"}], "]"}]}], ")"}]}], "]"}]}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Fv1", "[", 
+     RowBox[{
+     "y_", ",", " ", "Nu_", ",", " ", "Nm_", ",", " ", "Ns_", ",", " ", 
+      "Pmean_"}], "]"}], ":=", 
+    RowBox[{"(", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"y", "<=", " ", 
+        FractionBox["Ns", 
+         RowBox[{"4", "Nu"}]]}], ",", 
+       RowBox[{"NIntegrate", "[", 
+        RowBox[{
+         RowBox[{"P", "[", 
+          RowBox[{
+          "z", ",", " ", "Nu", ",", "Nm", ",", " ", "Ns", ",", " ", "Pmean"}],
+           "]"}], ",", " ", 
+         RowBox[{"{", 
+          RowBox[{"z", ",", " ", "y", ",", " ", 
+           FractionBox["Ns", 
+            RowBox[{"4", "Nu"}]]}], "}"}]}], "]"}], "  ", ",", "0"}], "]"}], 
+     ")"}]}], "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.981348087374509*^9, 3.981348087511155*^9}, {
+  3.98134940457913*^9, 3.9813495025824823`*^9}, {3.9813499982679873`*^9, 
+  3.9813500182680492`*^9}},ExpressionUUID->"b4c91684-d0b5-4b2f-8c2d-\
+e03b5e6453f9"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   StyleBox[
+    StyleBox[
+     RowBox[{"(", "*"}]],
+    FontWeight->"Plain"], 
+   RowBox[{
+    StyleBox[
+     RowBox[{"Figure", " ", "4", "d"}],
+     FontWeight->"Bold"], 
+    StyleBox[";",
+     FontWeight->"Plain"]}], 
+   StyleBox[
+    StyleBox[
+     RowBox[{"*", ")"}]],
+    FontWeight->"Plain"]}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"L", "=", "200"}], ";", " ", 
+    RowBox[{"Nu", "=", "0.01"}], ";", 
+    RowBox[{"NsMean", "=", "2"}], ";", " ", 
+    RowBox[{"uL", "=", "0.01"}], ";", 
+    RowBox[{"yThreshold", "=", "2"}], ";", 
+    RowBox[{"Nm", "=", 
+     RowBox[{"{", 
+      RowBox[{"0.1", ",", "2"}], "}"}]}], ";", 
+    RowBox[{"demeSize", "=", "200"}], ";", 
+    RowBox[{"Vs", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"dataEffSize", "=", 
+     RowBox[{
+     "Import", "[", 
+      "\"\</Users/lijuan/Desktop/polygenicAdaptation/data/stabSel_diffEff/\
+mixEff/simu/Nu0.01_Vs1_aExpNuL_L200_N200_D100.effSize\>\"", "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Nm", "=", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0.1", ",", "0.5", ",", "2", ",", "10"}], "}"}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"m", "=", "5"}], ",", " ", 
+     RowBox[{"m", "<=", "5"}], ",", 
+     RowBox[{"m", "=", 
+      RowBox[{"m", "+", "1"}]}], ",", 
+     RowBox[{
+      RowBox[{"NsPerLoc", "=", 
+       RowBox[{"demeSize", "*", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"dataEffSize", "[", 
+           RowBox[{"[", "m", "]"}], "]"}], "^", "2"}], "/", 
+         RowBox[{"(", 
+          RowBox[{"2", " ", "Vs"}], ")"}]}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"NmEff", ",", "VBgen", ",", " ", "Vg"}], "}"}], "=", 
+       RowBox[{"iterateVgenic", "[", 
+        RowBox[{"NsPerLoc", ",", "Nu", ",", 
+         RowBox[{"Nm", "[", 
+          RowBox[{"[", "m", "]"}], "]"}], ",", " ", "L", ",", "demeSize", ",",
+          " ", "Vs", ",", "5"}], "]"}]}], ";", 
+      RowBox[{"Print", "[", "Vg", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"NsValues", "=", 
+       RowBox[{"Flatten", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Range", "[", 
+           RowBox[{"0.001", ",", "0.015", ",", " ", "0.001"}], "]"}], ",", 
+          RowBox[{"Range", "[", 
+           RowBox[{"0.02", ",", "0.5", ",", " ", "0.005"}], "]"}], ",", " ", 
+          RowBox[{"Range", "[", 
+           RowBox[{"0.51", ",", "1", ",", " ", "0.01"}], "]"}], ",", " ", 
+          RowBox[{"Range", "[", 
+           RowBox[{"1.1", ",", "5", ",", " ", "0.1"}], "]"}], ",", 
+          RowBox[{"Range", "[", 
+           RowBox[{"5.2", ",", "10", ",", "0.2"}], "]"}], ",", " ", 
+          RowBox[{"Range", "[", 
+           RowBox[{"11", ",", "15", ",", "1"}], "]"}]}], "}"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"pmeansNsValues", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"metaP", "[", 
+          RowBox[{"Nu", ",", " ", 
+           RowBox[{"Nm", "[", 
+            RowBox[{"[", "m", "]"}], "]"}], ",", " ", "#"}], "]"}], "&"}], "/@",
+         " ", "NsValues"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"NsEffValues", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"NsEff", "[", 
+          RowBox[{"Nu", ",", " ", "#", ",", " ", "Vg", ",", " ", "Vs"}], 
+          "]"}], "&"}], "/@", "NsValues"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"pmeansNsEffValues", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"metaP", "[", 
+          RowBox[{"Nu", ",", " ", "NmEff", ",", " ", "#"}], "]"}], "&"}], "/@",
+         " ", "NsEffValues"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"FvL20011", "=", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Fv1", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"1", "/", "400"}], "*", 
+            RowBox[{"(", 
+             RowBox[{"1", "-", 
+              RowBox[{"1", "/", "400"}]}], ")"}], " ", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "/", "Nu"}]}], ",", " ", "Nu", 
+           ",", " ", 
+           RowBox[{"Nm", "[", 
+            RowBox[{"[", "m", "]"}], "]"}], ",", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "2", "]"}], "]"}]}], " ", "]"}], "&"}], "/@", " ", 
+        RowBox[{"Transpose", "@", 
+         RowBox[{"{", 
+          RowBox[{"NsValues", ",", " ", "pmeansNsValues"}], "}"}]}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"FvL20012", "=", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Fv1", "[", 
+          RowBox[{"yThreshold", ",", " ", "Nu", ",", " ", 
+           RowBox[{"Nm", "[", 
+            RowBox[{"[", "m", "]"}], "]"}], ",", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "2", "]"}], "]"}]}], " ", "]"}], "&"}], "/@", " ", 
+        RowBox[{"Transpose", "@", 
+         RowBox[{"{", 
+          RowBox[{"NsValues", ",", " ", "pmeansNsValues"}], "}"}]}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"FvL20021", "=", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Fv1", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"1", "/", "400"}], "*", 
+            RowBox[{"(", 
+             RowBox[{"1", "-", 
+              RowBox[{"1", "/", "400"}]}], ")"}], 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "/", "Nu"}], "*", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "2", "]"}], "]"}], "/", 
+             RowBox[{"#", "[", 
+              RowBox[{"[", "1", "]"}], "]"}]}]}], ",", " ", "Nu", ",", " ", 
+           "NmEff", ",", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "2", "]"}], "]"}]}], "]"}], "&"}], "/@", 
+        RowBox[{"Transpose", "@", 
+         RowBox[{"{", 
+          RowBox[{"NsEffValues", ",", " ", "pmeansNsEffValues"}], "}"}]}]}]}],
+       ";", "\[IndentingNewLine]", 
+      RowBox[{"FvL20022", "=", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Fv1", "[", 
+          RowBox[{
+           RowBox[{"yThreshold", "*", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "2", "]"}], "]"}], "/", 
+             RowBox[{"#", "[", 
+              RowBox[{"[", "1", "]"}], "]"}]}]}], ",", " ", "Nu", ",", " ", 
+           "NmEff", ",", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], ",", " ", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "3", "]"}], "]"}]}], "]"}], "&"}], "/@", 
+        RowBox[{"Transpose", "@", 
+         RowBox[{"{", 
+          RowBox[{
+          "NsValues", ",", "NsEffValues", ",", " ", "pmeansNsEffValues"}], 
+          "}"}]}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Export", "[", 
+       RowBox[{
+        RowBox[{"StringJoin", "[", 
+         RowBox[{"\"\<Fy_Nu\>\"", ",", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"Nu", ",", " ", "InputForm"}], "]"}], ",", "\"\<_Nm\>\"", 
+          ",", 
+          RowBox[{"ToString", "[", 
+           RowBox[{
+            RowBox[{"Nm", "[", 
+             RowBox[{"[", "m", "]"}], "]"}], ",", " ", "InputForm"}], "]"}], 
+          " ", ",", " ", "\"\<_Ns_Fv_Prob_mixExp\>\"", ",", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"NsMean", ",", " ", "InputForm"}], "]"}], ",", 
+          "\"\<.v\>\"", ",", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"yThreshold", ",", " ", "InputForm"}], "]"}], ",", " ", 
+          "\"\<.dat\>\""}], "]"}], ",", 
+        RowBox[{"Transpose", "@", 
+         RowBox[{"{", 
+          RowBox[{
+          "NsValues", ",", "FvL20011", ",", " ", "FvL20012", ",", "  ", 
+           "NsEffValues", ",", " ", "FvL20021", ",", "  ", "FvL20022"}], 
+          "}"}]}], ",", "  ", "\"\<Table\>\""}], "]"}]}]}], 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.981348087374509*^9, 3.981348087511155*^9}, {
+   3.98134940457913*^9, 3.9813495025824823`*^9}, {3.9813499982679873`*^9, 
+   3.981350008018599*^9}, {3.981350059474073*^9, 3.981350064491458*^9}, 
+   3.98135018257306*^9},ExpressionUUID->"02bc488e-46e4-4cf6-a050-\
+650435095d14"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   StyleBox["(*",
+    FontWeight->"Plain"], 
+   RowBox[{
+    StyleBox[
+     RowBox[{"Figure", " ", "4", "f"}],
+     FontWeight->"Bold"], 
+    StyleBox[";",
+     FontWeight->"Plain"]}], 
+   StyleBox["*)",
+    FontWeight->"Plain"]}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"L", "=", "200"}], ";", " ", 
+    RowBox[{"Nu", "=", "0.01"}], ";", 
+    RowBox[{"NsMean", "=", "2"}], ";", " ", 
+    RowBox[{"uL", "=", "0.01"}], ";", 
+    RowBox[{"yThreshold", "=", "2"}], ";", 
+    RowBox[{"Nm", "=", 
+     RowBox[{"{", 
+      RowBox[{"0.1", ",", "2"}], "}"}]}], ";", 
+    RowBox[{"demeSize", "=", "200"}], ";", 
+    RowBox[{"Vs", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"dataEffSize", "=", 
+     RowBox[{
+     "Import", "[", 
+      "\"\</Users/lijuan/Desktop/polygenicAdaptation/data/stabSel_diffEff/\
+mixEff/simu/Nu0.01_Vs1_aExpNuL_L200_N200_D100.effSize\>\"", "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Nm", "=", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0.1", ",", "0.5", ",", "2", ",", " ", "10"}], 
+      "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"m", "=", "5"}], ",", " ", 
+     RowBox[{"m", "<=", "5"}], ",", 
+     RowBox[{"m", "=", 
+      RowBox[{"m", "+", "1"}]}], ",", 
+     RowBox[{
+      RowBox[{"NsPerLoc", "=", 
+       RowBox[{"demeSize", "*", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"dataEffSize", "[", 
+           RowBox[{"[", "m", "]"}], "]"}], "^", "2"}], "/", 
+         RowBox[{"(", 
+          RowBox[{"2", " ", "Vs"}], ")"}]}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"pmeansNsPerLoc", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"metaP", "[", 
+          RowBox[{"Nu", ",", " ", 
+           RowBox[{"Nm", "[", 
+            RowBox[{"[", "m", "]"}], "]"}], ",", " ", "#"}], "]"}], "&"}], "/@",
+         " ", "NsPerLoc"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"NmEff", ",", "VBgen", ",", " ", "Vg"}], "}"}], "=", 
+       RowBox[{"iterateVgenic", "[", 
+        RowBox[{"NsPerLoc", ",", "Nu", ",", 
+         RowBox[{"Nm", "[", 
+          RowBox[{"[", "m", "]"}], "]"}], ",", " ", "L", ",", "demeSize", ",",
+          " ", "Vs", ",", "5"}], "]"}]}], ";", 
+      RowBox[{"Print", "[", "Vg", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"effNsPerLoc", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"NsEff", "[", 
+          RowBox[{"Nu", ",", " ", "#", ",", " ", "Vg", ",", " ", "Vs"}], 
+          "]"}], "&"}], "/@", "NsPerLoc"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"pmeansEffNsPerLoc", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"metaP", "[", 
+          RowBox[{"Nu", ",", " ", 
+           RowBox[{"Nm", "[", 
+            RowBox[{"[", "m", "]"}], "]"}], ",", " ", "#"}], "]"}], "&"}], "/@",
+         " ", "effNsPerLoc"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{"Original", " ", "paramters"}], "*)"}], "\[IndentingNewLine]", 
+      
+      RowBox[{"FvL20011", "=", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Fv1", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"1", "/", "400"}], "*", 
+            RowBox[{"(", 
+             RowBox[{"1", "-", 
+              RowBox[{"1", "/", "400"}]}], ")"}], " ", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "/", "Nu"}]}], ",", " ", "Nu", 
+           ",", " ", 
+           RowBox[{"Nm", "[", 
+            RowBox[{"[", "m", "]"}], "]"}], ",", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "2", "]"}], "]"}]}], " ", "]"}], "&"}], "/@", " ", 
+        RowBox[{"Transpose", "@", 
+         RowBox[{"{", 
+          RowBox[{"NsPerLoc", ",", " ", "pmeansNsPerLoc"}], "}"}]}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"FvL20012", "=", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Fv1", "[", 
+          RowBox[{"yThreshold", ",", " ", "Nu", ",", " ", 
+           RowBox[{"Nm", "[", 
+            RowBox[{"[", "m", "]"}], "]"}], ",", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "2", "]"}], "]"}]}], " ", "]"}], "&"}], "/@", " ", 
+        RowBox[{"Transpose", "@", 
+         RowBox[{"{", 
+          RowBox[{"NsPerLoc", ",", " ", "pmeansNsPerLoc"}], "}"}]}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Vgi1", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"HetDeme", "[", 
+           RowBox[{"Nu", ",", " ", 
+            RowBox[{"Nm", "[", 
+             RowBox[{"[", "m", "]"}], "]"}], ",", " ", 
+            RowBox[{"#", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+            RowBox[{"#", "[", 
+             RowBox[{"[", "2", "]"}], "]"}]}], " ", "]"}], "*", 
+          RowBox[{"#", "[", 
+           RowBox[{"[", "3", "]"}], "]"}]}], "&"}], "/@", 
+        RowBox[{"Transpose", "@", 
+         RowBox[{"{", 
+          RowBox[{"NsPerLoc", ",", " ", "pmeansNsPerLoc", ",", " ", 
+           RowBox[{
+            RowBox[{"dataEffSize", "[", 
+             RowBox[{"[", "m", "]"}], "]"}], "^", "2"}]}], "}"}]}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{"Effective", " ", "parameters"}], "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"FvL20021", "=", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Fv1", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"1", "/", "400"}], "*", 
+            RowBox[{"(", 
+             RowBox[{"1", "-", 
+              RowBox[{"1", "/", "400"}]}], ")"}], 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "/", "Nu"}], "*", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "2", "]"}], "]"}], "/", 
+             RowBox[{"#", "[", 
+              RowBox[{"[", "1", "]"}], "]"}]}]}], ",", " ", "Nu", ",", " ", 
+           "NmEff", ",", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], ",", " ", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "3", "]"}], "]"}]}], "]"}], "&"}], "/@", 
+        RowBox[{"Transpose", "@", 
+         RowBox[{"{", 
+          RowBox[{
+          "NsPerLoc", ",", "effNsPerLoc", ",", " ", "pmeansEffNsPerLoc"}], 
+          "}"}]}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"FvL20022", "=", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Fv1", "[", 
+          RowBox[{
+           RowBox[{"yThreshold", "*", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "2", "]"}], "]"}], "/", 
+             RowBox[{"#", "[", 
+              RowBox[{"[", "1", "]"}], "]"}]}]}], ",", " ", "Nu", ",", " ", 
+           "NmEff", ",", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], ",", " ", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "3", "]"}], "]"}]}], "]"}], "&"}], "/@", 
+        RowBox[{"Transpose", "@", 
+         RowBox[{"{", 
+          RowBox[{
+          "NsPerLoc", ",", "effNsPerLoc", ",", " ", "pmeansEffNsPerLoc"}], 
+          "}"}]}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Vgi2", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"HetDeme", "[", 
+           RowBox[{"Nu", ",", " ", "NmEff", ",", " ", 
+            RowBox[{"#", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+            RowBox[{"#", "[", 
+             RowBox[{"[", "2", "]"}], "]"}]}], " ", "]"}], "*", 
+          RowBox[{"#", "[", 
+           RowBox[{"[", "3", "]"}], "]"}]}], "&"}], "/@", 
+        RowBox[{"Transpose", "@", 
+         RowBox[{"{", 
+          RowBox[{"effNsPerLoc", ",", " ", "pmeansEffNsPerLoc", ",", " ", 
+           RowBox[{
+            RowBox[{"dataEffSize", "[", 
+             RowBox[{"[", "m", "]"}], "]"}], "^", "2"}]}], "}"}]}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", "Output", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"Export", "[", 
+       RowBox[{
+        RowBox[{"StringJoin", "[", 
+         RowBox[{"\"\<Nu\>\"", ",", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"Nu", ",", " ", "InputForm"}], "]"}], ",", "\"\<_Nm\>\"", 
+          ",", 
+          RowBox[{"ToString", "[", 
+           RowBox[{
+            RowBox[{"Nm", "[", 
+             RowBox[{"[", "m", "]"}], "]"}], ",", " ", "InputForm"}], "]"}], 
+          " ", ",", " ", "\"\<_Ns_Vg_Fv1_Fv2_mixExp\>\"", ",", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"NsMean", ",", " ", "InputForm"}], "]"}], ",", 
+          "\"\<.v\>\"", ",", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"yThreshold", ",", " ", "InputForm"}], "]"}], ",", "  ", 
+          "\"\<.sim.dat\>\""}], "]"}], ",", 
+        RowBox[{"Transpose", "@", 
+         RowBox[{"{", 
+          RowBox[{
+          "NsPerLoc", ",", "Vgi1", ",", "FvL20011", ",", " ", "FvL20012", ",",
+            "  ", "effNsPerLoc", ",", " ", "Vgi2", ",", "FvL20021", ",", "  ",
+            "FvL20022"}], "}"}]}], ",", "  ", "\"\<Table\>\""}], "]"}]}]}], 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.981350168046796*^9, 
+  3.9813501790749197`*^9}},ExpressionUUID->"ab4b932b-b6d1-4799-aad5-\
+15ec46621181"],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"Figure", " ", "S5", " ", 
+      RowBox[{"(", 
+       StyleBox[
+        RowBox[{"lin", "es"}]], ")"}]}],
+     FontWeight->"Bold"], ";", " ", 
+    RowBox[{
+    "Scaled", " ", "genic", " ", "variance", " ", "in", " ", "panmictic", " ",
+      "population"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"ClearAll", "[", "\"\<Global'*\>\"", "]"}], "\[IndentingNewLine]", 
+   
+   RowBox[{
+    RowBox[{
+     RowBox[{"f", "[", 
+      RowBox[{"p_", ",", "Nu_", ",", "Ns_"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"Exp", "[", 
+       RowBox[{
+        RowBox[{"-", "4"}], "*", "Ns", "*", "p", "*", 
+        RowBox[{"(", 
+         RowBox[{"1", "-", "p"}], ")"}]}], "]"}], " ", 
+      SuperscriptBox["p", 
+       RowBox[{
+        RowBox[{"4", " ", "Nu"}], " ", "-", "1"}]], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", "p"}], ")"}], 
+       RowBox[{
+        RowBox[{"4", " ", "Nu"}], " ", "-", "1"}]]}]}], " ", ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"fnorm", "[", 
+      RowBox[{"p_", ",", "Nu_", ",", "Ns_"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"f", "[", 
+       RowBox[{"p", ",", "Nu", ",", "Ns"}], "]"}], "/", 
+      RowBox[{"NIntegrate", "[", 
+       RowBox[{
+        RowBox[{"f", "[", 
+         RowBox[{"p0", ",", "Nu", ",", "Ns"}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"p0", ",", "0", ",", "1"}], "}"}]}], "]"}]}]}], ";"}], " ", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"HetDeme", "[", 
+      RowBox[{"Nu_", ",", " ", "Ns_"}], "]"}], ":=", " ", 
+     RowBox[{"NIntegrate", "[", 
+      RowBox[{
+       RowBox[{"2", "p", "*", 
+        RowBox[{"(", 
+         RowBox[{"1", "-", "p"}], ")"}], "*", 
+        RowBox[{"fnorm", "[", 
+         RowBox[{"p", ",", "Nu", ",", " ", "Ns"}], "]"}]}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"p", ",", "0", ",", "1"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"VgScaled", "[", 
+      RowBox[{"Nu_", ",", " ", "Ns_"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"NIntegrate", "[", 
+       RowBox[{
+        RowBox[{"p", "*", 
+         RowBox[{"(", 
+          RowBox[{"1", "-", "p"}], ")"}], "*", 
+         RowBox[{"fnorm", "[", 
+          RowBox[{"p", ",", "Nu", ",", " ", "Ns"}], "]"}]}], ",", " ", 
+        RowBox[{"{", 
+         RowBox[{"p", ",", "0", ",", "1"}], "}"}]}], "]"}], "*", 
+      RowBox[{"Ns", "/", "Nu"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"VgNew", "[", 
+      RowBox[{
+      "Nu_", ",", " ", "Ns_", ",", " ", "a_", ",", " ", "Ndeme_", ",", "L_"}],
+       "]"}], ":=", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"HW", "=", "0.5"}], ";", 
+       RowBox[{"Vs", "=", 
+        RowBox[{"Ndeme", "*", 
+         RowBox[{
+          RowBox[{"a", "^", "2"}], "/", 
+          RowBox[{"(", 
+           RowBox[{"Ns", "*", "2"}], ")"}]}]}]}], ";", "\[IndentingNewLine]", 
+       
+       RowBox[{"HWnew", "=", 
+        RowBox[{"HetDeme", "[", 
+         RowBox[{"Nu", ",", " ", "Ns"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       
+       RowBox[{"While", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Abs", "[", 
+           RowBox[{"HW", "-", "HWnew"}], "]"}], ">", "0.000001"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Vg", "=", 
+           RowBox[{"HWnew", "*", 
+            RowBox[{"a", "^", "2"}], "*", "L"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"X", "=", 
+           FractionBox["Vs", "Vg"]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"deducVg", "=", 
+           FractionBox[
+            RowBox[{"3", "+", "X", "-", 
+             RadicalBox[
+              RowBox[{"1", "+", 
+               RowBox[{"6", "X"}], "+", 
+               SuperscriptBox["X", "2"]}], "2"]}], "4"]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"NsEff", "=", 
+           RowBox[{"Ns", 
+            RowBox[{
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"1", "-", "deducVg"}], ")"}], "2"], "/", 
+             RowBox[{"(", 
+              RowBox[{"1", "+", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"1", "-", "deducVg"}], ")"}], "/", "X"}]}], 
+              ")"}]}]}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"HW", "=", "HWnew"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"HWnew", "=", 
+           RowBox[{"HetDeme", "[", 
+            RowBox[{"Nu", ",", "NsEff"}], "]"}]}], ";"}]}], 
+        "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", "HWnew"}], 
+      ")"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"a", "=", "0.1"}], ";", 
+    RowBox[{"Nu", "=", "0.01"}], ";", " ", 
+    RowBox[{"Lu", "=", "0.01"}], ";", " ", 
+    RowBox[{"Ns", "=", "5"}], ";", 
+    RowBox[{"popSize", "=", "1000"}], ";", " ", 
+    RowBox[{"L", "=", "popSize"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"VgScaled", "[", 
+    RowBox[{"Nu", ",", " ", "Ns"}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"VgNew", "[", 
+      RowBox[{
+      "Nu", ",", " ", "Ns", ",", " ", "a", ",", " ", "popSize", ",", "L"}], 
+      "]"}], "/", "2"}], "*", 
+    RowBox[{"Ns", "/", "Nu"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.981350379827999*^9, 3.981350636979216*^9}, {
+  3.981350721377738*^9, 
+  3.981350751347769*^9}},ExpressionUUID->"3a4a6d54-3ba8-40a1-916f-\
+2e9d2f6cf9d8"]
+},
+WindowSize->{1440, 789},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"13.1 for Mac OS X ARM (64-bit) (June 16, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"e50d83dd-1e6c-480c-9e97-4a79abdcf48d"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 8630, 270, 326, "Input",ExpressionUUID->"745a332b-040e-4978-9636-e9d3e820c7ec"],
+Cell[9191, 292, 9539, 252, 673, "Input",ExpressionUUID->"b299c82b-2b0a-40e2-9055-ee17b5fb8851"],
+Cell[18733, 546, 4916, 128, 587, "Input",ExpressionUUID->"1a6190c5-d28c-4fcf-a2de-0d1cf3551bc6"],
+Cell[23652, 676, 9515, 234, 993, "Input",ExpressionUUID->"0931be1c-ec84-4a16-8ec1-adb0b89fe66f"],
+Cell[33170, 912, 13179, 337, 1104, "Input",ExpressionUUID->"63b5246e-b6ed-4d2f-a23a-7786365f52d1"],
+Cell[46352, 1251, 4390, 117, 243, "Input",ExpressionUUID->"674cbd1d-7c3b-46e9-ac53-d45ee56ac305"],
+Cell[50745, 1370, 9750, 271, 481, "Input",ExpressionUUID->"5fa8fc13-cd53-48f7-a41a-0ccb0248822d"],
+Cell[60498, 1643, 10278, 277, 481, "Input",ExpressionUUID->"99a5b54e-d3f4-4172-bb64-96d6a16cb589"],
+Cell[70779, 1922, 11072, 306, 1024, "Input",ExpressionUUID->"b4c91684-d0b5-4b2f-8c2d-e03b5e6453f9"],
+Cell[81854, 2230, 8358, 218, 346, "Input",ExpressionUUID->"02bc488e-46e4-4cf6-a050-650435095d14"],
+Cell[90215, 2450, 9305, 245, 430, "Input",ExpressionUUID->"ab4b932b-b6d1-4799-aad5-15ec46621181"],
+Cell[99523, 2697, 5478, 154, 590, "Input",ExpressionUUID->"3a4a6d54-3ba8-40a1-916f-2e9d2f6cf9d8"]
+}
+]
+*)
+
