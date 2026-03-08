@@ -1,1 +1,1 @@
-Code for manuscript: Juan Li, Joachim Hermisson and Himani Sachdeva 2026 Eﬀect of population structure and stabilizing selection on quantitative genetic variation
+Code for manuscript: 2026-Juan Li, Joachim Hermisson and Himani Sachdeva-Eﬀect of population structure and stabilizing selection on quantitative genetic variation
