@@ -40,7 +40,7 @@ echo "start: `date`"
 #do
 #	for Nm in 0 0.03 0.05 0.1 0.2 0.3 0.5 0.7 1 2 5 10
 #	do
-#		for r in 1 2 3 4
+#		for r in $(seq 10)
 #		do
 #			echo $Nm
 #			if [ $(echo $Nm '<0.5' | bc -l) -eq 0 ]
@@ -65,7 +65,7 @@ echo "start: `date`"
 
 #for Nm in 0 0.03 0.05 0.1 0.2 0.3 0.5 0.7 1 2 5 10
 #do
-#	for r in 1 2 3 4
+#	for r in $(seq 10)
 #	do
 #		echo $Nm
 #		echo $r
@@ -118,7 +118,7 @@ echo "start: `date`"
 #do
 #	for Nm in 0 0.25 10 0.089 2
 #	do
-#		for r in 1 2 3 4
+#		for r in $(seq 10)
 #		do
 #			if [ $(echo $Nm '<0.5' | bc -l) -eq 0 ]
 #			then
@@ -183,7 +183,7 @@ echo "start: `date`"
 #for numLoc in $(seq 100 100 1000)
 #do
 #	demeSize=$numLoc
-#	for r in $(seq 11 20)
+#	for r in $(seq 20)
 #	do
 #		 python3 $code/simStabSelV1.py --num_demes 1  --deme_size $demeSize  --Nu $Nu --num_loci $numLoc --Ns $Ns --Nm 0 --num_generations 50001  --output_file $wd/data/stabSel_numLoci/initBeta/het_trait_Nu$Nu\_Ns$Ns\_N$demeSize\_D1_L$numLoc\_r$r 
 #	done
