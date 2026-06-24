@@ -16,7 +16,7 @@ For example, allele frequnecy dynamics in single-locus underdominant model were 
 
 >python3 $code/simUnderDomi.py  --max_generations 500001 --Ns $Ns --Nm $Nm --init_allele_freq $initFrq --outfile $data/frq_$initFrq\_Nm$Nm\_Ns$Ns\_r$r
 
-In this case, simulations track allele frquencies over time for specified combinations of total generations (500001), selection strength (the underdominant coefficient scaled by deme size (*N*), *Ns*), the scaled migration rate scaled (*Nm*), and initial allele frequencies defined by variable *initFrq*. Frequencies were typically recorded at fixed intervals (e.g., every 1000 generations).  
+In this case, simulations track allele frquencies over time for specified combinations of total generations (500001), selection strength (the underdominant coefficient scaled by deme size *N* (*Ns*), the scaled migration rate scaled (*Nm*), and initial allele frequencies defined by variable *initFrq*. Frequencies were typically recorded at fixed intervals (e.g., every 1000 generations).  
 
 For multilocus stabilizing selection with three heterogeneous effects, simulations were run using:
 
