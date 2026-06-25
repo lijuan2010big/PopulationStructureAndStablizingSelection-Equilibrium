@@ -4,7 +4,7 @@ This project code consists of three main components: analytical computations, si
 
 ### Analytical computations.
 
-The mathematic notebook **2026-StabSel.nb** contains numerical evaluations of analytical expressions derived in the manuscript. Results from this notebook were exported to text files and subsequently combined with simulation outputs for visualization and comparison. These analytical results are typically stored in the folder *predictions*, using the same parameter combinations and naming conventions as the corresponding simulations to facilitate direct comparison.
+The mathematica notebook **2026-StabSel.nb** contains numerical evaluations of analytical expressions derived in the manuscript. Results from this notebook were exported to text files and subsequently combined with simulation outputs for visualization and comparison. These analytical results are typically stored in the folder *predictions*, using the same parameter combinations and naming conventions as the corresponding simulations to facilitate direct comparison.
 
 Those results are often stored in a folder **predictions** aligning with simulations with the same set of paramters. 
 
